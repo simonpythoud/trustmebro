@@ -184,36 +184,34 @@ export default async function Home({ searchParams }: { searchParams?: { [key: st
 				<div className="mx-auto max-w-6xl px-6 py-16">
 					<div className="grid gap-10 md:grid-cols-2 items-center">
 						<div className="space-y-4">
-							<h3 className="text-xl md:text-2xl font-semibold">Why TrustMeBro</h3>
+							<h3 className="text-xl md:text-2xl font-semibold">{t.whyTitle}</h3>
 							<ul className="space-y-3 text-foreground/80 text-sm">
-								<li>• Zero ghosting: funds are committed up-front.</li>
-								<li>• Transparent states: every step logged as an event.</li>
-								<li>• Fair outcomes: cancellations and disputes handled cleanly.</li>
-								<li>• Built for EU/CH compliance and GDPR.</li>
+								<li>{t.whyBullet1}</li>
+								<li>{t.whyBullet2}</li>
+								<li>{t.whyBullet3}</li>
+								<li>{t.whyBullet4}</li>
 							</ul>
 							<div className="pt-2">
-								<Link href="/signin" className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:opacity-95 transition">
-									Create your first contract in minutes
-								</Link>
+								<Link href="/signin" className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:opacity-95 transition">{t.whyCta}</Link>
 							</div>
 						</div>
 						<div className="rounded-xl border border-foreground/10 bg-background/60 p-6">
 							<div className="grid grid-cols-2 gap-4 text-center">
 								<div className="rounded-lg border border-foreground/10 p-4">
 									<div className="text-3xl font-semibold">48h</div>
-									<div className="text-xs text-foreground/60">Auto-approve window</div>
+									<div className="text-xs text-foreground/60">{t.kpiAutoApprove}</div>
 								</div>
 								<div className="rounded-lg border border-foreground/10 p-4">
 									<div className="text-3xl font-semibold">100%</div>
-									<div className="text-xs text-foreground/60">Funds traceability</div>
+									<div className="text-xs text-foreground/60">{t.kpiTraceability}</div>
 								</div>
 								<div className="rounded-lg border border-foreground/10 p-4">
 									<div className="text-3xl font-semibold">2x</div>
-									<div className="text-xs text-foreground/60">Mutual deposits</div>
+									<div className="text-xs text-foreground/60">{t.kpiMutual}</div>
 								</div>
 								<div className="rounded-lg border border-foreground/10 p-4">
 									<div className="text-3xl font-semibold"><span className="align-top">CHF</span></div>
-									<div className="text-xs text-foreground/60">Currency-first (v1)</div>
+									<div className="text-xs text-foreground/60">{t.kpiCurrency}</div>
 								</div>
 							</div>
 						</div>
@@ -224,21 +222,21 @@ export default async function Home({ searchParams }: { searchParams?: { [key: st
 			{/* Security */}
 			<section className="border-t border-foreground/10">
 				<div className="mx-auto max-w-6xl px-6 py-16">
-					<h3 className="text-xl md:text-2xl font-semibold">Security & compliance</h3>
+					<h3 className="text-xl md:text-2xl font-semibold">{t.secTitle}</h3>
 					<div className="mt-6 grid gap-6 md:grid-cols-3">
 						<div className="rounded-lg border border-foreground/10 p-6 bg-background/60 text-sm">
-							<div className="font-semibold">CSP + HSTS</div>
-							<p className="mt-1 text-foreground/70">Strict security headers and HTTPS-only.
+							<div className="font-semibold">{t.sec1Title}</div>
+							<p className="mt-1 text-foreground/70">{t.sec1Desc}
 							</p>
 						</div>
 						<div className="rounded-lg border border-foreground/10 p-6 bg-background/60 text-sm">
-							<div className="font-semibold">Audit trail</div>
-							<p className="mt-1 text-foreground/70">Every transition and payout is logged for proof.
+							<div className="font-semibold">{t.sec2Title}</div>
+							<p className="mt-1 text-foreground/70">{t.sec2Desc}
 							</p>
 						</div>
 						<div className="rounded-lg border border-foreground/10 p-6 bg-background/60 text-sm">
-							<div className="font-semibold">KYC-ready</div>
-							<p className="mt-1 text-foreground/70">Stripe Connect onboarding for payouts and compliance.</p>
+							<div className="font-semibold">{t.sec3Title}</div>
+							<p className="mt-1 text-foreground/70">{t.sec3Desc}</p>
 						</div>
 					</div>
 				</div>
@@ -247,19 +245,19 @@ export default async function Home({ searchParams }: { searchParams?: { [key: st
 			{/* Testimonials */}
 			<section className="border-t border-foreground/10">
 				<div className="mx-auto max-w-6xl px-6 py-16">
-					<h3 className="text-xl md:text-2xl font-semibold">What early users say</h3>
+					<h3 className="text-xl md:text-2xl font-semibold">{t.testiTitle}</h3>
 					<div className="mt-6 grid gap-6 md:grid-cols-3">
 						<figure className="rounded-lg border border-foreground/10 p-6 bg-background/60 text-sm">
-							<blockquote className="text-foreground/80">“No more chasing invoices. We approve and the money moves.”</blockquote>
-							<figcaption className="mt-3 text-foreground/60">— Brand owner, CH</figcaption>
+							<blockquote className="text-foreground/80">{t.testi1Quote}</blockquote>
+							<figcaption className="mt-3 text-foreground/60">{t.testi1By}</figcaption>
 						</figure>
 						<figure className="rounded-lg border border-foreground/10 p-6 bg-background/60 text-sm">
-							<blockquote className="text-foreground/80">“Deposits make everyone serious. It’s finally fair.”</blockquote>
-							<figcaption className="mt-3 text-foreground/60">— Creator, FR</figcaption>
+							<blockquote className="text-foreground/80">{t.testi2Quote}</blockquote>
+							<figcaption className="mt-3 text-foreground/60">{t.testi2By}</figcaption>
 						</figure>
 						<figure className="rounded-lg border border-foreground/10 p-6 bg-background/60 text-sm">
-							<blockquote className="text-foreground/80">“The contract + escrow combo is exactly what was missing.”</blockquote>
-							<figcaption className="mt-3 text-foreground/60">— Agency, EU</figcaption>
+							<blockquote className="text-foreground/80">{t.testi3Quote}</blockquote>
+							<figcaption className="mt-3 text-foreground/60">{t.testi3By}</figcaption>
 						</figure>
 					</div>
 				</div>
@@ -268,15 +266,11 @@ export default async function Home({ searchParams }: { searchParams?: { [key: st
 			{/* Final CTA */}
 			<section className="border-t border-foreground/10">
 				<div className="mx-auto max-w-6xl px-6 py-16 text-center">
-					<h3 className="text-2xl md:text-3xl font-semibold">Ready to collaborate with confidence?</h3>
-					<p className="mt-3 text-foreground/70 max-w-2xl mx-auto">Spin up a contract, fund the escrow, and protect both sides. It takes 2 minutes.</p>
+					<h3 className="text-2xl md:text-3xl font-semibold">{t.finalTitle}</h3>
+					<p className="mt-3 text-foreground/70 max-w-2xl mx-auto">{t.finalDesc}</p>
 					<div className="mt-6 flex justify-center gap-3">
-						<Link href="/signin" className="inline-flex items-center justify-center rounded-md bg-foreground px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition">
-							Sign up / Sign in
-						</Link>
-						<Link href="/contracts/new" className="inline-flex items-center justify-center rounded-md border border-foreground/20 px-5 py-3 text-sm font-medium hover:bg-foreground/5 transition">
-							Draft a contract
-						</Link>
+						<Link href="/signin" className="inline-flex items-center justify-center rounded-md bg-foreground px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition">{t.finalPrimary}</Link>
+						<Link href="/contracts/new" className="inline-flex items-center justify-center rounded-md border border-foreground/20 px-5 py-3 text-sm font-medium hover:bg-foreground/5 transition">{t.finalSecondary}</Link>
 					</div>
 				</div>
 			</section>
