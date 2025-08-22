@@ -1,0 +1,337 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// =======================
+/// Enums
+/// =======================
+enum Role {
+  brand
+  creator
+  admin
+}
+
+enum ContractState {
+  Draft
+  Proposed
+  Accepted
+  Funded
+  InProgress
+  Submitted
+  UnderReview
+  RevisionsRequested
+  Released
+  Closed
+  Expired
+  Cancelled
+  Disputed
+  AdminResolved
+}
+
+enum FundingType {
+  brand_budget
+  brand_deposit
+  creator_deposit
+}
+
+enum FundingStatus {
+  pending
+  succeeded
+  failed
+}
+
+enum ReviewDecision {
+  approve
+  revise
+}
+
+enum DisputeStatus {
+  open
+  resolved
+}
+
+enum DisputeResolution {
+  released
+  refunded
+  split
+}
+
+enum FeeKind {
+  platform
+}
+
+enum Currency {
+  CHF
+  EUR
+  USD
+}
+
+enum Platform {
+  tiktok
+  instagram
+  youtube
+  other
+}
+
+/// =======================
+/// Models (App)
+/// =======================
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  image        String?
+  emailVerified DateTime?
+  role         Role     @default(creator)
+  passwordHash String?  // for Credentials auth
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  profile      Profile?
+  // Relations
+  brandContracts   Contract[] @relation("BrandContracts")
+  creatorContracts Contract[] @relation("CreatorContracts")
+  contractEvents   ContractEvent[]
+  reviews          Review[]
+  disputesOpened   Dispute[]  @relation("DisputeOpener")
+  payouts          Payout[]
+  auditLogs        AuditLog[]
+
+  // NextAuth adapter relations
+  accounts Account[]
+  sessions Session[]
+}
+
+model Profile {
+  userId       String  @id
+  companyName  String?
+  vatId        String?
+  address      String?
+  country      String?
+  pspAccountId String? // Stripe/MangoPay account
+  kycStatus    String? // mirrored from PSP
+
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+/// Contrat entre une marque (brand) et un créateur (creator)
+model Contract {
+  id                      String         @id @default(cuid())
+  title                   String
+  brief                   String
+  deliverableType         Platform
+  deliverableRequirements Json
+  hashtags                Json
+  productName             String
+  productValueCents       Int            @default(0)
+
+  currency                Currency       @default(CHF)
+  budgetCents             Int            // montant rémunération créateur
+  creatorDepositCents     Int            @default(0)
+  brandDepositCents       Int            @default(0)
+
+  deadlineAt              DateTime
+  state                   ContractState  @default(Draft)
+  autoApproveAfterH       Int            @default(48)
+
+  createdAt               DateTime       @default(now())
+  updatedAt               DateTime       @updatedAt
+
+  // Relations
+  brandId                 String
+  creatorId               String
+  brand                   User           @relation("BrandContracts", fields: [brandId], references: [id], onDelete: Restrict)
+  creator                 User           @relation("CreatorContracts", fields: [creatorId], references: [id], onDelete: Restrict)
+
+  events                  ContractEvent[]
+  fundings                Funding[]
+  submissions             Submission[]
+  reviews                 Review[]
+  disputes                Dispute[]
+  payouts                 Payout[]
+  fees                    Fee[]
+
+  @@index([state, brandId])
+  @@index([state, creatorId])
+  @@index([brandId, creatorId])
+  @@index([deadlineAt])
+}
+
+/// Historique immuable des transitions / actions
+model ContractEvent {
+  id         String   @id @default(cuid())
+  contractId String
+  actorId    String?
+  type       String   // e.g. "PROPOSED","FUNDED.brand_budget","AUTO_APPROVE"
+  payload    Json
+  createdAt  DateTime @default(now())
+
+  contract   Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([contractId, createdAt])
+}
+
+/// Traces de paiements entrants (dépôts + budget)
+model Funding {
+  id                   String        @id @default(cuid())
+  contractId           String
+  type                 FundingType
+  amountCents          Int
+  pspPaymentIntentId   String        @unique
+  status               FundingStatus @default(pending)
+  createdAt            DateTime      @default(now())
+
+  contract             Contract      @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@index([contractId, type, status])
+}
+
+/// Soumission de la publication par le créateur
+model Submission {
+  id             String   @id @default(cuid())
+  contractId     String
+  url            String
+  platform       Platform
+  postIdentifier String?
+  screenshots    Json     // array of objects (keys: url, s3Key, etc.)
+  notes          String?
+  createdAt      DateTime @default(now())
+
+  contract       Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@unique([contractId, createdAt]) // limite rudimentaire v1 (1 soumission par itération temporelle)
+  @@index([contractId, createdAt])
+}
+
+/// Décision de la marque suite à une soumission
+model Review {
+  id         String         @id @default(cuid())
+  contractId String
+  reviewerId String
+  decision   ReviewDecision
+  comment    String?
+  createdAt  DateTime       @default(now())
+
+  contract   Contract       @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  reviewer   User           @relation(fields: [reviewerId], references: [id], onDelete: Restrict)
+
+  @@index([contractId, createdAt])
+}
+
+/// Litige ouvert par une des deux parties
+model Dispute {
+  id         String            @id @default(cuid())
+  contractId String
+  openerId   String
+  reason     String
+  evidence   Json?
+  status     DisputeStatus     @default(open)
+  resolution DisputeResolution?
+  createdAt  DateTime          @default(now())
+  resolvedAt DateTime?
+
+  contract   Contract          @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  opener     User              @relation("DisputeOpener", fields: [openerId], references: [id], onDelete: Restrict)
+
+  @@index([contractId, status])
+}
+
+/// Paiement sortant (créateur) lors du Released
+model Payout {
+  id            String   @id @default(cuid())
+  contractId    String
+  beneficiaryId String
+  amountCents   Int
+  pspTransferId String?  @unique
+  status        String   // e.g. "queued","paid","failed"
+  createdAt     DateTime @default(now())
+
+  contract      Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  beneficiary   User     @relation(fields: [beneficiaryId], references: [id], onDelete: Restrict)
+
+  @@index([contractId, status])
+}
+
+/// Frais plateforme calculés à la libération
+model Fee {
+  id              String   @id @default(cuid())
+  contractId      String
+  kind            FeeKind  @default(platform)
+  baseAmountCents Int
+  percentage      Float
+  amountCents     Int
+  createdAt       DateTime @default(now())
+
+  contract        Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@index([contractId])
+}
+
+/// Journal d’audit (actions sensibles, admin, webhooks, etc.)
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  action     String
+  resource   String
+  resourceId String?
+  metadata   Json
+  createdAt  DateTime @default(now())
+
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+}
+
+/// =======================
+/// Models (NextAuth Adapter)
+/// =======================
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  oauth_token_secret String?
+  oauth_token        String?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
