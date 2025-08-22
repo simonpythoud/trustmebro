@@ -1,16 +1,16 @@
-import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
+import { getRequestUserEmail } from '@/lib/user'
 import { CreateContractSchema } from '@/lib/schemas'
 
 export const runtime = 'nodejs'
 
 export async function GET(req: Request) {
-	const session = await auth()
-	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+	let email: string | null = await getRequestUserEmail()
+	if (!email) return new Response('Unauthorized', { status: 401 })
 	const url = new URL(req.url)
 	const role = url.searchParams.get('role')
 	if (role !== 'brand' && role !== 'creator') return new Response('Bad role', { status: 400 })
-	const me = await prisma.user.findUnique({ where: { email: session.user.email } })
+	const me = await prisma.user.findUnique({ where: { email } })
 	if (!me) return new Response('Unauthorized', { status: 401 })
 	const where = role === 'brand' ? { brandId: me.id } : { creatorId: me.id }
 	const items = await prisma.contract.findMany({ where, orderBy: { createdAt: 'desc' } })
@@ -18,9 +18,9 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-	const session = await auth()
-	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
-	const user = await prisma.user.findUnique({ where: { email: session.user.email } })
+	let email: string | null = await getRequestUserEmail()
+	if (!email) return new Response('Unauthorized', { status: 401 })
+	const user = await prisma.user.findUnique({ where: { email } })
 	if (!user || user.role !== 'brand') return new Response('Forbidden', { status: 403 })
 
 	const body = await req.json()
