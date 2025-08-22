@@ -1,4 +1,4 @@
-import { auth } from '@/lib/auth'
+import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { CreateContractSchema } from '@/lib/schemas'
 
@@ -20,7 +20,6 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
 	const session = await auth()
 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
-
 	const user = await prisma.user.findUnique({ where: { email: session.user.email } })
 	if (!user || user.role !== 'brand') return new Response('Forbidden', { status: 403 })
 
@@ -52,5 +51,5 @@ export async function POST(req: Request) {
 		data: { contractId: contract.id, actorId: user.id, type: 'DRAFT_CREATED', payload: {} },
 	})
 
-	return Response.json({ id: contract.id })
+	return new Response(JSON.stringify({ id: contract.id }), { status: 200, headers: { 'Content-Type': 'application/json' } })
 }

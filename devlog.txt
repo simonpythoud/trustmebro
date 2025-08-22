@@ -1,0 +1,411 @@
+
+> web@0.1.0 dev
+> next dev --turbopack
+
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'serverComponentsExternalPackages' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ `experimental.serverComponentsExternalPackages` has been moved to `serverExternalPackages`. Please update your next.config.ts file accordingly.
+   ▲ Next.js 15.5.0 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://10.100.0.27:3000
+   - Environments: .env
+   - Experiments (use with caution):
+     · serverComponentsExternalPackages
+
+ ✓ Starting...
+ ✓ Compiled middleware in 75ms
+ ✓ Ready in 783ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 1353ms
+ HEAD /dashboard 200 in 1568ms
+ GET /dashboard 200 in 74ms
+ ✓ Compiled /api/contracts in 258ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 655ms
+ ✓ Compiled /contracts/new in 141ms
+ GET /contracts/new 200 in 173ms
+ GET /dashboard 200 in 76ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 329ms
+ ✓ Compiled /favicon.ico in 132ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 374ms
+ GET /contracts/new 200 in 47ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 264ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 266ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 364ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 263ms
+ ✓ Compiled /signin in 173ms
+ GET /signin 200 in 203ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 264ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 268ms
+ GET /contracts/new 200 in 41ms
+ ✓ Compiled /api/test/seed-users in 61ms
+ POST /api/test/seed-users 200 in 881ms
+ GET /dashboard 200 in 78ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 276ms
+ GET /signin 200 in 72ms
+ ✓ Compiled /api/auth/[...nextauth] in 72ms
+ GET /api/auth/providers 405 in 823ms
+ POST /api/auth/_log 405 in 243ms
+ GET /api/auth/error 405 in 244ms
+ GET /contracts/new 200 in 82ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at POST (src/app/api/contracts/route.ts:21:28)
+  19 |
+  20 | export async function POST(req: Request) {
+> 21 | 	const session = await auth()
+     | 	                          ^
+  22 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  23 |
+  24 | 	const user = await prisma.user.findUnique({ where: { email: session.user.email } })
+ POST /api/contracts 500 in 316ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at POST (src/app/api/contracts/route.ts:21:28)
+  19 |
+  20 | export async function POST(req: Request) {
+> 21 | 	const session = await auth()
+     | 	                          ^
+  22 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  23 |
+  24 | 	const user = await prisma.user.findUnique({ where: { email: session.user.email } })
+ POST /api/contracts 500 in 258ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at POST (src/app/api/contracts/route.ts:21:28)
+  19 |
+  20 | export async function POST(req: Request) {
+> 21 | 	const session = await auth()
+     | 	                          ^
+  22 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  23 |
+  24 | 	const user = await prisma.user.findUnique({ where: { email: session.user.email } })
+ POST /api/contracts 500 in 256ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at POST (src/app/api/contracts/route.ts:21:28)
+  19 |
+  20 | export async function POST(req: Request) {
+> 21 | 	const session = await auth()
+     | 	                          ^
+  22 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  23 |
+  24 | 	const user = await prisma.user.findUnique({ where: { email: session.user.email } })
+ POST /api/contracts 500 in 272ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at POST (src/app/api/contracts/route.ts:21:28)
+  19 |
+  20 | export async function POST(req: Request) {
+> 21 | 	const session = await auth()
+     | 	                          ^
+  22 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  23 |
+  24 | 	const user = await prisma.user.findUnique({ where: { email: session.user.email } })
+ POST /api/contracts 500 in 259ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at POST (src/app/api/contracts/route.ts:21:28)
+  19 |
+  20 | export async function POST(req: Request) {
+> 21 | 	const session = await auth()
+     | 	                          ^
+  22 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  23 |
+  24 | 	const user = await prisma.user.findUnique({ where: { email: session.user.email } })
+ POST /api/contracts 500 in 271ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 298ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 256ms
+ GET /contracts/new 200 in 42ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 261ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 258ms
+ GET /dashboard 200 in 71ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 281ms
+ GET /dashboard 200 in 75ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 281ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 232ms
+ GET /dashboard 200 in 74ms
+TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src/app/api/contracts/route.ts:8:28)
+   6 |
+   7 | export async function GET(req: Request) {
+>  8 | 	const session = await auth()
+     | 	                          ^
+   9 | 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  10 | 	const url = new URL(req.url)
+  11 | 	const role = url.searchParams.get('role')
+ GET /api/contracts?role=brand 500 in 273ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 240ms
+ ✓ Compiled / in 182ms
+ GET / 200 in 239ms
+ GET /signin 200 in 51ms
+ GET / 200 in 71ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 246ms
+ GET /signin 200 in 68ms
+ GET /api/auth/providers 405 in 257ms
+ POST /api/auth/_log 405 in 257ms
+ GET /api/auth/error 405 in 267ms
+ GET /contracts/new 200 in 72ms
+ ✓ Compiled / in 35ms
+ GET /contracts/new 200 in 149ms
+ GET / 200 in 153ms
+ ✓ Compiled /contracts/new in 26ms
+ GET /contracts/new 200 in 117ms
+ GET / 200 in 120ms
+ GET /contracts/new 200 in 70ms
+ GET / 200 in 76ms
+ GET /contracts/new 200 in 85ms
+ GET / 200 in 93ms
+ GET /contracts/new 200 in 62ms
+ GET / 200 in 66ms
+ ⨯ ./node_modules/next-auth/lib/client.js:3:1
+Module not found: Can't resolve '@auth/core/errors'
+[0m [90m 1 |[39m [32m"use client"[39m[33m;[39m
+ [90m 2 |[39m [36mimport[39m [33m*[39m [36mas[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mAuthError[39m } [36mfrom[39m [32m"@auth/core/errors"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [90m/** @todo */[39m
+ [90m 5 |[39m [36mclass[39m [33mClientFetchError[39m [36mextends[39m [33mAuthError[39m {
+ [90m 6 |[39m }[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next-auth/lib/client.js [Client Component Browser]
+    ./node_modules/next-auth/react.js [Client Component Browser]
+    ./src/app/signin/page.tsx [Client Component Browser]
+    ./src/app/signin/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next-auth/lib/client.js [Client Component SSR]
+    ./node_modules/next-auth/react.js [Client Component SSR]
+    ./src/app/signin/page.tsx [Client Component SSR]
+    ./src/app/signin/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ ⨯ ./node_modules/next-auth/lib/client.js:3:1
+Module not found: Can't resolve '@auth/core/errors'
+[0m [90m 1 |[39m [32m"use client"[39m[33m;[39m
+ [90m 2 |[39m [36mimport[39m [33m*[39m [36mas[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mAuthError[39m } [36mfrom[39m [32m"@auth/core/errors"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [90m/** @todo */[39m
+ [90m 5 |[39m [36mclass[39m [33mClientFetchError[39m [36mextends[39m [33mAuthError[39m {
+ [90m 6 |[39m }[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next-auth/lib/client.js [Client Component Browser]
+    ./node_modules/next-auth/react.js [Client Component Browser]
+    ./src/app/signin/page.tsx [Client Component Browser]
+    ./src/app/signin/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next-auth/lib/client.js [Client Component SSR]
+    ./node_modules/next-auth/react.js [Client Component SSR]
+    ./src/app/signin/page.tsx [Client Component SSR]
+    ./src/app/signin/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ ⨯ ./node_modules/next-auth/lib/client.js:3:1
+Module not found: Can't resolve '@auth/core/errors'
+[0m [90m 1 |[39m [32m"use client"[39m[33m;[39m
+ [90m 2 |[39m [36mimport[39m [33m*[39m [36mas[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mAuthError[39m } [36mfrom[39m [32m"@auth/core/errors"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [90m/** @todo */[39m
+ [90m 5 |[39m [36mclass[39m [33mClientFetchError[39m [36mextends[39m [33mAuthError[39m {
+ [90m 6 |[39m }[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next-auth/lib/client.js [Client Component Browser]
+    ./node_modules/next-auth/react.js [Client Component Browser]
+    ./src/app/signin/page.tsx [Client Component Browser]
+    ./src/app/signin/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next-auth/lib/client.js [Client Component SSR]
+    ./node_modules/next-auth/react.js [Client Component SSR]
+    ./src/app/signin/page.tsx [Client Component SSR]
+    ./src/app/signin/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ ⨯ ./node_modules/next-auth/lib/client.js:3:1
+Module not found: Can't resolve '@auth/core/errors'
+[0m [90m 1 |[39m [32m"use client"[39m[33m;[39m
+ [90m 2 |[39m [36mimport[39m [33m*[39m [36mas[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mAuthError[39m } [36mfrom[39m [32m"@auth/core/errors"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [90m/** @todo */[39m
+ [90m 5 |[39m [36mclass[39m [33mClientFetchError[39m [36mextends[39m [33mAuthError[39m {
+ [90m 6 |[39m }[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next-auth/lib/client.js [Client Component Browser]
+    ./node_modules/next-auth/react.js [Client Component Browser]
+    ./src/app/signin/page.tsx [Client Component Browser]
+    ./src/app/signin/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next-auth/lib/client.js [Client Component SSR]
+    ./node_modules/next-auth/react.js [Client Component SSR]
+    ./src/app/signin/page.tsx [Client Component SSR]
+    ./src/app/signin/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET / 200 in 144ms
+ GET /contracts/new 200 in 144ms
+ ✓ Compiled in 503ms
+[TypeError: Function.prototype.apply was called on #<Object>, which is an object and not a function]
+ GET /api/auth/session 500 in 383ms
+[TypeError: Function.prototype.apply was called on #<Object>, which is an object and not a function]
+ GET /api/auth/session 500 in 283ms
+ ✓ Compiled /signin in 23ms
+ GET /signin 200 in 121ms
+ GET /contracts/new 200 in 59ms
