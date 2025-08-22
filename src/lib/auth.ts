@@ -14,10 +14,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 				password: { label: 'Password', type: 'password' },
 			},
 			async authorize(credentials) {
-				if (!credentials?.email || !credentials?.password) return null
-				const user = await prisma.user.findUnique({ where: { email: credentials.email } })
+				const email = credentials?.email as string | undefined
+				const password = credentials?.password as string | undefined
+				if (!email || !password) return null
+				const user = await prisma.user.findUnique({ where: { email } })
 				if (!user?.passwordHash) return null
-				const ok = await compare(credentials.password, user.passwordHash)
+				const ok = await compare(password, user.passwordHash)
 				if (!ok) return null
 				return { id: user.id, email: user.email, name: user.name, role: user.role } as any
 			},
