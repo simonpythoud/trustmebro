@@ -1,10 +1,12 @@
-export { auth as middleware } from '@/lib/auth'
+import { NextResponse } from 'next/server'
+
+export function middleware() {
+	return NextResponse.next()
+}
 
 export const config = {
 	matcher: [
-		// Protect all API routes except auth and public
 		'/api/:path*',
-		// Protect app routes that need auth (adjust later)
 		'/(dashboard|contracts|admin)/:path*',
 	],
 }

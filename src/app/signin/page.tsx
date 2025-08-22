@@ -18,7 +18,7 @@ export default function SignInPage() {
             email,
             password,
             redirect: true,
-            callbackUrl: '/'
+            callbackUrl: '/dashboard'
           })
           if ((res as any)?.error) setError((res as any).error)
         }}

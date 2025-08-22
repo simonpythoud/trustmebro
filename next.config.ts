@@ -10,6 +10,9 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
+	experimental: {
+		serverComponentsExternalPackages: ['openid-client', 'jose'],
+	},
 	async headers() {
 		return [
 			{ source: '/(.*)', headers: securityHeaders },

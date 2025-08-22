@@ -13,6 +13,7 @@ export const env = {
   STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY ?? '',
   STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET ?? '',
   STRIPE_CONNECT_TYPE: process.env.STRIPE_CONNECT_TYPE ?? 'standard',
+  PLATFORM_FEE_PERCENT: Number(process.env.PLATFORM_FEE_PERCENT ?? '0.08'),
   AUTO_APPROVE_HOURS: Number(process.env.AUTO_APPROVE_HOURS ?? '48'),
   FEATURE_TEST_ENDPOINTS: (process.env.FEATURE_TEST_ENDPOINTS ?? 'false') === 'true',
 }
