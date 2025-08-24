@@ -1,5 +1,7 @@
 import { prisma } from '@/lib/prisma'
 
+export const runtime = 'nodejs'
+
 export async function POST() {
   const now = new Date()
   const candidates = await prisma.contract.findMany({

@@ -2,6 +2,8 @@ import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { stripe } from '@/lib/stripe'
 
+export const runtime = 'nodejs'
+
 export async function POST() {
 	const session = await auth()
 	if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })

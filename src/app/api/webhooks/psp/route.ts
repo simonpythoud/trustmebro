@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { stripe, serializeStripeEvent } from '@/lib/stripe'
 
+export const runtime = 'nodejs'
+
 // Simplified webhook: mark funding by PI id as succeeded idempotently
 export async function POST(req: Request) {
   const sig = req.headers.get('stripe-signature')

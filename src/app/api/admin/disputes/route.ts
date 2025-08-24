@@ -1,6 +1,8 @@
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 
+export const runtime = 'nodejs'
+
 export async function GET(req: Request) {
   const session = await auth()
   if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })

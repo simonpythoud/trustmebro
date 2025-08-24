@@ -2,6 +2,8 @@ import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import type { NextRequest } from 'next/server'
 
+export const runtime = 'nodejs'
+
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }>}) {
   const { id } = await params
   const session = await auth()

@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { hash } from 'bcryptjs'
 
+export const runtime = 'nodejs'
+
 export async function POST() {
 	const pass = await hash('Passw0rd!', 10)
 	const users = await Promise.all([
