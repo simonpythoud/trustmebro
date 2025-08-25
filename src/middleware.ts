@@ -17,8 +17,8 @@ export async function middleware(req: any) {
 		return NextResponse.next()
 	}
 
-	// App authenticated areas
-	if (pathname.startsWith('/dashboard') || pathname.startsWith('/contracts')) {
+	// App authenticated areas (allow public dashboard for conversion)
+	if (pathname.startsWith('/contracts')) {
 		const token: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
 		if (!token?.email) {
 			return NextResponse.redirect(new URL('/signin', url), { status: 302 })
