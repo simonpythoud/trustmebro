@@ -1,9 +1,11 @@
 import { prisma } from '@/lib/prisma'
+import { env } from '@/lib/env'
 import { hash } from 'bcryptjs'
 
 export const runtime = 'nodejs'
 
 export async function POST() {
+  if (!env.FEATURE_TEST_ENDPOINTS) return new Response('Not found', { status: 404 })
 	const pass = await hash('Passw0rd!', 10)
 	const users = await Promise.all([
 		prisma.user.upsert({

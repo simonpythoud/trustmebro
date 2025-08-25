@@ -1,8 +1,10 @@
 import { prisma } from '@/lib/prisma'
+import { env } from '@/lib/env'
 
 export const runtime = 'nodejs'
 
 export async function POST() {
+  if (!env.FEATURE_TEST_ENDPOINTS) return new Response('Not found', { status: 404 })
   const now = new Date()
   const candidates = await prisma.contract.findMany({
     where: { state: 'UnderReview' },
