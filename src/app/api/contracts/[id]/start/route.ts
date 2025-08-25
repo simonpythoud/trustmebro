@@ -1,5 +1,7 @@
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
+import { assertCanPerform } from '@/lib/state'
+import { isFundingCompleteForContract } from '@/lib/finance'
 import type { NextRequest } from 'next/server'
 
 export const runtime = 'nodejs'
@@ -12,7 +14,11 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
   if (!me) return new Response('Forbidden', { status: 403 })
   const funds = await prisma.funding.findMany({ where: { contractId: id, status: 'succeeded' }})
   const c = await prisma.contract.findUniqueOrThrow({ where: { id }})
-  const ok = funds.some(f=>f.type==='brand_budget') && (c.brandDepositCents===0 || funds.some(f=>f.type==='brand_deposit')) && (c.creatorDepositCents===0 || funds.some(f=>f.type==='creator_deposit'))
+  try { assertCanPerform(c.state as any, 'start') } catch { return new Response('Invalid state', { status: 409 }) }
+  const ok = isFundingCompleteForContract(
+		{ brandDepositCents: c.brandDepositCents, creatorDepositCents: c.creatorDepositCents },
+		funds as any,
+	)
   if (!ok) return new Response('Funding incomplete', { status: 400 })
   await prisma.contract.update({ where: { id }, data: { state: 'InProgress' }})
   await prisma.contractEvent.create({ data: { contractId: id, actorId: me.id, type: 'STARTED', payload: {} }})

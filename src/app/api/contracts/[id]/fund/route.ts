@@ -1,6 +1,7 @@
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { stripe } from '@/lib/stripe'
+import { assertCanPerform } from '@/lib/state'
 import type { NextRequest } from 'next/server'
 
 export const runtime = 'nodejs'
@@ -14,6 +15,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const { type } = await req.json()
   if (!['brand_budget','brand_deposit','creator_deposit'].includes(type)) return new Response('Bad type', { status: 400 })
   const contract = await prisma.contract.findUniqueOrThrow({ where: { id }, include: { brand: true, creator: true }})
+  try { assertCanPerform(contract.state as any, 'fund') } catch { return new Response('Invalid state', { status: 409 }) }
   const amountCents = type === 'brand_budget' ? contract.budgetCents : type === 'brand_deposit' ? contract.brandDepositCents : contract.creatorDepositCents
   if (amountCents <= 0) return new Response('No amount for this funding type', { status: 400 })
 
