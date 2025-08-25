@@ -15,7 +15,10 @@ export async function POST() {
     const t = new Date(lastSubmit.createdAt.getTime() + hours * 3600 * 1000)
     if (now >= t) {
       await prisma.contract.update({ where: { id: c.id }, data: { state: 'Released' }})
-      await prisma.contractEvent.create({ data: { contractId: c.id, actorId: null, type: 'AUTO_APPROVE', payload: {} }})
+      const exists = await prisma.contractEvent.findFirst({ where: { contractId: c.id, type: 'AUTO_APPROVE' }})
+      if (!exists) {
+        await prisma.contractEvent.create({ data: { contractId: c.id, actorId: null, type: 'AUTO_APPROVE', payload: {} }})
+      }
       count++
     }
   }

@@ -29,8 +29,21 @@ export async function POST(req: Request) {
         const hasBrandDep = c.brandDepositCents===0 || funds.some(f=>f.type==='brand_deposit')
         const hasCreatorDep = c.creatorDepositCents===0 || funds.some(f=>f.type==='creator_deposit')
         if (hasBudget && hasBrandDep && hasCreatorDep) {
-          await prisma.contract.update({ where: { id: c.id }, data: { state: 'Funded' }})
-          await prisma.contractEvent.create({ data: { contractId: c.id, actorId: null, type: 'FUNDED.all', payload: {} }})
+          if (c.state !== 'Funded' && c.state !== 'InProgress') {
+            await prisma.contract.update({ where: { id: c.id }, data: { state: 'Funded' }})
+            const fundedEvent = await prisma.contractEvent.findFirst({ where: { contractId: c.id, type: 'FUNDED.all' }})
+            if (!fundedEvent) {
+              await prisma.contractEvent.create({ data: { contractId: c.id, actorId: null, type: 'FUNDED.all', payload: {} }})
+            }
+          }
+          // Immediately move to InProgress if fully funded and not already progressed
+          if (c.state !== 'InProgress') {
+            await prisma.contract.update({ where: { id: c.id }, data: { state: 'InProgress' }})
+            const startedEvent = await prisma.contractEvent.findFirst({ where: { contractId: c.id, type: 'STARTED.auto' }})
+            if (!startedEvent) {
+              await prisma.contractEvent.create({ data: { contractId: c.id, actorId: null, type: 'STARTED.auto', payload: {} }})
+            }
+          }
         }
       }
       await prisma.auditLog.create({ data: { action: 'WEBHOOK.pi.succeeded', resource: 'Funding', resourceId: id, metadata: serializeStripeEvent(event) } })
