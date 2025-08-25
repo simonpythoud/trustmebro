@@ -38,11 +38,11 @@ export default function ProfilePage() {
     })()
   }, [])
 
-  if (loading) return <div className="p-6">Loading…</div>
-  if (error) return <div className="p-6 text-red-600">{error}</div>
+  if (loading) return <div className="mx-auto max-w-3xl px-6 py-16">Loading…</div>
+  if (error) return <div className="mx-auto max-w-3xl px-6 py-16 text-red-600">{error}</div>
 
   return (
-    <div className="mx-auto max-w-3xl p-6 grid gap-6">
+    <div className="mx-auto max-w-3xl px-6 py-10 grid gap-6">
       <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">
         <h2 className="font-semibold mb-4">Profile</h2>
         <form

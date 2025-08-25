@@ -1,10 +1,12 @@
 import { auth } from '@/lib/auth'
 import { StateBadge } from '../../components/StateBadge'
+import { cookies } from 'next/headers'
 
 export const runtime = 'nodejs'
 
 async function getContract(id: string) {
-	const res = await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}`, { cache: 'no-store' })
+	const cookie = cookies().toString()
+	const res = await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}`, { cache: 'no-store', headers: { cookie } })
 	if (!res.ok) return null
 	return res.json()
 }
@@ -12,17 +14,19 @@ async function getContract(id: string) {
 export default async function ContractDetail({ params }: { params: Promise<{ id: string }>}) {
 	const { id } = await params
 	const session = await auth()
-	if (!session?.user) return <main className="p-6">Unauthorized</main>
+	if (!session?.user) return <main className="mx-auto max-w-4xl px-6 py-16">Unauthorized</main>
 	const contract = await getContract(id)
-	if (!contract) return <main className="p-6">Not found</main>
+	if (!contract) return <main className="mx-auto max-w-4xl px-6 py-16">Not found</main>
 	const role = (session.user as any).role as 'brand'|'creator'|'admin'
 	async function fund(type: string) {
 		'use server'
-		await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}/fund`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type }) })
+		const cookie = cookies().toString()
+		await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}/fund`, { method: 'POST', headers: { 'Content-Type': 'application/json', cookie }, body: JSON.stringify({ type }) })
 	}
 	async function approve() {
 		'use server'
-		await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}/review`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decision: 'approve' }) })
+		const cookie = cookies().toString()
+		await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}/review`, { method: 'POST', headers: { 'Content-Type': 'application/json', cookie }, body: JSON.stringify({ decision: 'approve' }) })
 	}
 	return (
 		<main className="mx-auto max-w-4xl px-6 py-10 space-y-6">
@@ -51,7 +55,8 @@ export default async function ContractDetail({ params }: { params: Promise<{ id:
 			{role==='creator' && (
 				<form action={async ()=> {
 					'use server'
-					await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}/submit`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url: 'https://example.com', platform: 'tiktok', screenshots: [], notes: '' }) })
+					const cookie = cookies().toString()
+					await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}/submit`, { method: 'POST', headers: { 'Content-Type': 'application/json', cookie }, body: JSON.stringify({ url: 'https://example.com', platform: 'tiktok', screenshots: [], notes: '' }) })
 				}}>
 					<input type="hidden" value="https://example.com" />
 					<button data-testid="submission-send" className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:opacity-95">Submit</button>
