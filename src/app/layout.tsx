@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { SignOutButton } from "./components/SignOutButton";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -18,11 +20,12 @@ export const metadata: Metadata = {
   description: "Escrow + digital contracts for influencer collaborations (EU & US). Dual deposits, verified deliverables, automatic payouts. GDPR/FTC aware.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth()
   return (
     <html lang="en">
       <body
@@ -38,7 +41,17 @@ export default function RootLayout({
               <Link href="/" className="hover:underline">Home</Link>
               <Link href="/contracts/new" className="hover:underline">Create contract</Link>
               <Link href="/dashboard" className="hover:underline">Dashboard</Link>
-              <Link href="/signin" className="inline-flex items-center rounded-md border border-foreground/20 px-3 py-1.5 hover:bg-foreground/5">Sign in</Link>
+              {session?.user?.email ? (
+                <>
+                  <Link href="/profile" className="hover:underline">Profile</Link>
+                  <SignOutButton />
+                </>
+              ) : (
+                <>
+                  <Link href="/signin" className="inline-flex items-center rounded-md border border-foreground/20 px-3 py-1.5 hover:bg-foreground/5">Sign in</Link>
+                  <Link href="/signup" className="inline-flex items-center rounded-md bg-foreground px-3 py-1.5 text-background hover:opacity-90">Sign up</Link>
+                </>
+              )}
               <span className="mx-2 text-foreground/30">|</span>
               <Link href="/?lang=en" className="hover:underline">EN</Link>
               <Link href="/?lang=fr" className="hover:underline">FR</Link>

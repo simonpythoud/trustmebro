@@ -1,3 +1,5 @@
+# TrustMeBro - Secure agreement between influencers and brands
+
 Voici **TrustMeBro**. Un concept intéressant qui répond à un vrai problème : la confiance et l'exécution des contrats entre marques et créateurs de contenu. Je vais structurer ma réponse en plusieurs parties pour que tu aies une **vision complète** du projet :
 
 ---
@@ -687,21 +689,24 @@ Alternative **MangoPay** : wallets `E-Wallet` par partie, **pay-ins** → **escr
 
 * **Loi & for** par défaut (CH/FR)
 
-    
-    
-  
+---
 
-Dis-moi par quoi on attaque et je te le produis tout de suite.
+## Mise à jour (2025-08-25) — Profil utilisateur & Préférences
 
-##### **You said:**
+* Schéma Prisma: ajout `UserSettings` (1:1 avec `User`) et lien `User.settings`.
+* API:
+  * `POST /api/signup` (création compte email+password + `Profile` et `UserSettings` par défaut)
+  * `GET/PUT /api/user/profile` (lecture/mise à jour `Profile`)
+  * `GET/PUT /api/user/settings` (lecture/mise à jour `UserSettings`)
+* UI:
+  * Page `signin` existante, nouvelle page `signup`, nouvelle page `profile` (édition profil & préférences).
+  * Header "auth-aware": affiche `Profile` + `Sign out` si connecté; `Sign in` + `Sign up` sinon.
+* Auth: NextAuth Credentials, session via `auth()` dans les server components; `signOut()` côté client.
+* Conventions: routes en runtime Node.js, validation Zod.
 
-Oui, commence par 1, puis un a un
+##### Schéma Prisma complet
 
-###### **ChatGPT said:**
-
-Réflexion durant 13s
-
-Parfait — voici le **schéma Prisma complet** pour TrustMeBro (PostgreSQL). Il couvre les entités, relations, contraintes et index du MVP décrit. Copie-colle ce fichier en `prisma/schema.prisma`.
+Voici le **schéma Prisma complet** pour TrustMeBro (PostgreSQL). Il couvre les entités, relations, contraintes et index du MVP décrit. Copie-colle ce fichier en `prisma/schema.prisma`.
 
 `// prisma/schema.prisma`
 
@@ -1150,153 +1155,153 @@ Always show details
 
 `contract_content = """# Contrat de Collaboration — TrustMeBro (v1)`
 
-`**Référence contrat (auto)** : {{CONTRACT_ID}}`    
-`**Date d'émission** : {{ISSUE_DATE}}`    
+`**Référence contrat (auto)** : {{CONTRACT_ID}}`
+`**Date d'émission** : {{ISSUE_DATE}}`
 `**Loi applicable / For** : {{GOVERNING_LAW}} / {{JURISDICTION}}`  
 
 `---`
 
 `## 1) Parties`
 
-`**Marque (Donneur d'ordre)**`    
-`- Dénomination : {{BRAND_COMPANY_NAME}}`    
-`- N° TVA (si applicable) : {{BRAND_VAT_ID}}`    
-`- Adresse : {{BRAND_ADDRESS}}`    
-`- Pays : {{BRAND_COUNTRY}}`    
-`- Représentant : {{BRAND_REP_NAME}} ({{BRAND_REP_TITLE}})`    
+`**Marque (Donneur d'ordre)**`
+`- Dénomination : {{BRAND_COMPANY_NAME}}`
+`- N° TVA (si applicable) : {{BRAND_VAT_ID}}`
+`- Adresse : {{BRAND_ADDRESS}}`
+`- Pays : {{BRAND_COUNTRY}}`
+`- Représentant : {{BRAND_REP_NAME}} ({{BRAND_REP_TITLE}})`
 `- Email : {{BRAND_EMAIL}}`  
 
-`**Créateur de contenu (Prestataire)**`    
-`- Nom / Dénomination : {{CREATOR_NAME}}`    
-`- N° TVA (si applicable) : {{CREATOR_VAT_ID}}`    
-`- Adresse : {{CREATOR_ADDRESS}}`    
-`- Pays : {{CREATOR_COUNTRY}}`    
-`- Email : {{CREATOR_EMAIL}}`    
+`**Créateur de contenu (Prestataire)**`
+`- Nom / Dénomination : {{CREATOR_NAME}}`
+`- N° TVA (si applicable) : {{CREATOR_VAT_ID}}`
+`- Adresse : {{CREATOR_ADDRESS}}`
+`- Pays : {{CREATOR_COUNTRY}}`
+`- Email : {{CREATOR_EMAIL}}`
 `- Comptes plateformes : TikTok: {{CREATOR_TIKTOK}}, Instagram: {{CREATOR_IG}}, YouTube: {{CREATOR_YT}}`  
 
 `---`
 
 `## 2) Objet et livrable`
 
-`- **Produit / Marque promus** : {{PRODUCT_NAME}}`    
-`- **Plateforme** : {{PLATFORM}} (TikTok / Instagram / YouTube / Autre: {{PLATFORM_OTHER}})`    
-`- **Format & durée** : {{FORMAT_SPEC}} (ex. vidéo 15–60s)`    
-`- **Mentions obligatoires** : {{MANDATORY_MENTIONS}}`    
-`- **Hashtags** : {{HASHTAGS}}`    
-`- **Lien(s) d'appel à l'action (CTA)** : {{CTA_LINKS}}`    
-`- **Exigences spécifiques** : {{SPECIAL_REQUIREMENTS}}`    
+`- **Produit / Marque promus** : {{PRODUCT_NAME}}`
+`- **Plateforme** : {{PLATFORM}} (TikTok / Instagram / YouTube / Autre: {{PLATFORM_OTHER}})`
+`- **Format & durée** : {{FORMAT_SPEC}} (ex. vidéo 15–60s)`
+`- **Mentions obligatoires** : {{MANDATORY_MENTIONS}}`
+`- **Hashtags** : {{HASHTAGS}}`
+`- **Lien(s) d'appel à l'action (CTA)** : {{CTA_LINKS}}`
+`- **Exigences spécifiques** : {{SPECIAL_REQUIREMENTS}}`
 `- **Droits d'utilisation par la Marque** : {{USAGE_RIGHTS}} (ex. organique 12 mois, paid media: NON/OUI {{PAID_MEDIA_WINDOW}})`  
 
 `---`
 
 `## 3) Calendrier`
 
-`- **Date limite de publication** : {{DEADLINE_AT}} (TZ : {{TIMEZONE}})`    
-`- **Fenêtre de validation par la Marque** : {{AUTO_APPROVE_HOURS}} heures après soumission (à défaut d'action, approbation automatique).`    
+`- **Date limite de publication** : {{DEADLINE_AT}} (TZ : {{TIMEZONE}})`
+`- **Fenêtre de validation par la Marque** : {{AUTO_APPROVE_HOURS}} heures après soumission (à défaut d'action, approbation automatique).`
 `- **Prolongation** (optionnelle) : 1 prolongation possible de {{EXTENSION_DAYS}} jours si demandée avant l'échéance et acceptée par l'autre partie.`  
 
 `---`
 
 `## 4) Rémunération, dépôts et flux financiers`
 
-`- **Devise** : {{CURRENCY}} (v1 par défaut CHF)`    
-`- **Budget contrat (Marque → Créateur)** : {{BUDGET_AMOUNT}} {{CURRENCY}}`    
-`- **Dépôt Créateur (caution remboursable)** : {{CREATOR_DEPOSIT}} {{CURRENCY}}`    
-`- **Dépôt Marque (optionnel)** : {{BRAND_DEPOSIT}} {{CURRENCY}}`    
+`- **Devise** : {{CURRENCY}} (v1 par défaut CHF)`
+`- **Budget contrat (Marque → Créateur)** : {{BUDGET_AMOUNT}} {{CURRENCY}}`
+`- **Dépôt Créateur (caution remboursable)** : {{CREATOR_DEPOSIT}} {{CURRENCY}}`
+`- **Dépôt Marque (optionnel)** : {{BRAND_DEPOSIT}} {{CURRENCY}}`
 `- **Frais plateforme (TrustMeBro)** : {{PLATFORM_FEE_PERCENT}}% prélevés sur le budget lors de la libération.`  
 
-`**Règles**`    
-`1. Les fonds sont bloqués via le prestataire de paiement (escrow).`    
-`2. À **publication conforme** et **validation** (ou auto-approbation), la plateforme :`    
-   `- déclenche le **payout** du budget (moins frais) au Créateur ;`    
-   `- **rembourse** la caution du Créateur ;`    
-   `- **rembourse** la caution de la Marque (si applicable).`    
-`3. **Annulation mutuelle** : remboursement des fonds selon accord ; par défaut, budget et cautions remboursés intégralement.`    
-`4. **Expiration sans soumission** : remboursement du **budget** à la Marque ; caution du Créateur **confisquée** (sauf décision contraire en litige).`    
+`**Règles**`
+`1. Les fonds sont bloqués via le prestataire de paiement (escrow).`
+`2. À **publication conforme** et **validation** (ou auto-approbation), la plateforme :`
+   `- déclenche le **payout** du budget (moins frais) au Créateur ;`
+   `- **rembourse** la caution du Créateur ;`
+   `- **rembourse** la caution de la Marque (si applicable).`
+`3. **Annulation mutuelle** : remboursement des fonds selon accord ; par défaut, budget et cautions remboursés intégralement.`
+`4. **Expiration sans soumission** : remboursement du **budget** à la Marque ; caution du Créateur **confisquée** (sauf décision contraire en litige).`
 `5. **Litige** : la décision d'arbitrage (voir §8) détermine release/refund/split.`  
 
 `---`
 
 `## 5) Processus de livraison & vérification`
 
-`1. Le Créateur publie le contenu et soumet dans l'app : **URL publique**, **captures d'écran**, **identifiant de post** si disponible.`    
-`2. La Marque dispose de {{AUTO_APPROVE_HOURS}}h pour **Approuver** ou **Demander des révisions** (commentaire requis).`    
-`3. Passé ce délai, l'**approbation est automatique**.`    
+`1. Le Créateur publie le contenu et soumet dans l'app : **URL publique**, **captures d'écran**, **identifiant de post** si disponible.`
+`2. La Marque dispose de {{AUTO_APPROVE_HOURS}}h pour **Approuver** ou **Demander des révisions** (commentaire requis).`
+`3. Passé ce délai, l'**approbation est automatique**.`
 `4. La conformité couvre : présence du produit/marque, mentions/hashtags/CTA, format & timing convenus.`  
 
 `---`
 
 `## 6) Propriété intellectuelle & droits d'usage`
 
-`- Le **Créateur** reste titulaire des droits d'auteur sur son contenu, sous réserve des **licences** accordées à la Marque :`    
-  `- **Usage organique** (non sponsorisé) sur canaux de la Marque : {{USAGE_ORG_DURATION}} mois à compter de la publication.`    
-  `- **Paid media / whitelisting** : {{PAID_MEDIA_AUTH}} (OUI/NON) ; si OUI, fenêtre : {{PAID_MEDIA_WINDOW}} ; périmètre : {{PAID_MEDIA_TERRITORIES}}.`    
+`- Le **Créateur** reste titulaire des droits d'auteur sur son contenu, sous réserve des **licences** accordées à la Marque :`
+  `- **Usage organique** (non sponsorisé) sur canaux de la Marque : {{USAGE_ORG_DURATION}} mois à compter de la publication.`
+  `- **Paid media / whitelisting** : {{PAID_MEDIA_AUTH}} (OUI/NON) ; si OUI, fenêtre : {{PAID_MEDIA_WINDOW}} ; périmètre : {{PAID_MEDIA_TERRITORIES}}.`
 `- Toute adaptation, montage, sous-titrage, ou boost payant au-delà de ce qui précède nécessite l'accord écrit du Créateur.`  
 
 `---`
 
 `## 7) Confidentialité & conformité`
 
-`- Les parties s'engagent à conserver confidentielles les informations non publiques reçues dans le cadre du contrat.`    
-`- Chacune des parties garantit respecter les lois applicables (publicité, droit à l'image, CGU des plateformes, fiscalité, protection des données).`    
+`- Les parties s'engagent à conserver confidentielles les informations non publiques reçues dans le cadre du contrat.`
+`- Chacune des parties garantit respecter les lois applicables (publicité, droit à l'image, CGU des plateformes, fiscalité, protection des données).`
 `- Le Créateur s'engage à signaler toute relation rémunérée (#ad, #sponsorisé) conformément aux lois locales.`  
 
 `---`
 
 `## 8) Annulation, expiration, litiges`
 
-`- **Annulation mutuelle** : effective dès double consentement dans l'app ; remboursements selon §4.`    
-`- **Expiration** : en cas de non-publication à la date limite, application de la règle §4.4.`    
-`- **Litige** : peut être ouvert par l'une des parties. TrustMeBro (ou un arbitre désigné) tranche dans un délai raisonnable et peut décider :`    
-  `- **Released** (paiement au Créateur),`    
-  `- **Refunded** (remboursement à la Marque),`    
-  `- **Split** (répartition).`    
+`- **Annulation mutuelle** : effective dès double consentement dans l'app ; remboursements selon §4.`
+`- **Expiration** : en cas de non-publication à la date limite, application de la règle §4.4.`
+`- **Litige** : peut être ouvert par l'une des parties. TrustMeBro (ou un arbitre désigné) tranche dans un délai raisonnable et peut décider :`
+  `- **Released** (paiement au Créateur),`
+  `- **Refunded** (remboursement à la Marque),`
+  `- **Split** (répartition).`
 `La décision est **exécutoire dans la plateforme**.`  
 
 `---`
 
 `## 9) Responsabilités & garanties`
 
-`- Le Créateur garantit que le contenu ne viole pas de droits tiers et respecte les CGU des plateformes.`    
-`- La Marque garantit la véracité de ses informations sur le produit et détient les droits sur marques & logos fournis.`    
+`- Le Créateur garantit que le contenu ne viole pas de droits tiers et respecte les CGU des plateformes.`
+`- La Marque garantit la véracité de ses informations sur le produit et détient les droits sur marques & logos fournis.`
 `- **Limitation de responsabilité** de TrustMeBro : rôle de plateforme de mise en relation et d'exécution technique des flux ; pas responsable des dommages indirects ; responsabilité totale limitée aux frais perçus sur le contrat concerné.`  
 
 `---`
 
 `## 10) Données personnelles`
 
-`- Chaque partie agit comme **responsable de traitement** pour ses propres finalités ; la plateforme agit en **sous-traitant** pour l'hébergement et l'exécution des traitements techniques nécessaires au contrat.`    
+`- Chaque partie agit comme **responsable de traitement** pour ses propres finalités ; la plateforme agit en **sous-traitant** pour l'hébergement et l'exécution des traitements techniques nécessaires au contrat.`
 `- Droits des personnes, sécurité, conservation : selon Politique de confidentialité TrustMeBro.`  
 
 `---`
 
 `## 11) Loi applicable, juridiction, langue`
 
-`- **Loi** : {{GOVERNING_LAW}} (par défaut : Suisse).`    
-`- **For/Juridiction** : {{JURISDICTION}} (par défaut : Fribourg).`    
+`- **Loi** : {{GOVERNING_LAW}} (par défaut : Suisse).`
+`- **For/Juridiction** : {{JURISDICTION}} (par défaut : Fribourg).`
 `- **Langue** : français ; en cas de versions multiples, la version française prévaut (sauf stipulation contraire).`  
 
 `---`
 
 `## 12) Consentement électronique & preuve`
 
-`- Les parties acceptent la **signature électronique simple** via l'application TrustMeBro.`    
-`- Un **horodatage** et l'**empreinte (hash)** du PDF généré sont conservés.`    
-`- La preuve contractuelle inclut : métadonnées (IP, user agent), événements d'audit, accusés de réception email et journaux de paiement.`    
+`- Les parties acceptent la **signature électronique simple** via l'application TrustMeBro.`
+`- Un **horodatage** et l'**empreinte (hash)** du PDF généré sont conservés.`
+`- La preuve contractuelle inclut : métadonnées (IP, user agent), événements d'audit, accusés de réception email et journaux de paiement.`
 `- (Option v2) Signature qualifiée via prestataire eIDAS (ex. Skribble / DocuSign).`  
 
 `---`
 
 `## 13) Signatures`
 
-`**Pour la Marque**`    
-`Nom : {{BRAND_REP_NAME}} — Titre : {{BRAND_REP_TITLE}}`    
-`Date : {{SIGN_DATE_BRAND}}`    
+`**Pour la Marque**`
+`Nom : {{BRAND_REP_NAME}} — Titre : {{BRAND_REP_TITLE}}`
+`Date : {{SIGN_DATE_BRAND}}`
 `Signature électronique : (référence) {{ESIGN_REF_BRAND}}`
 
-`**Pour le Créateur**`    
-`Nom : {{CREATOR_NAME}}`    
-`Date : {{SIGN_DATE_CREATOR}}`    
+`**Pour le Créateur**`
+`Nom : {{CREATOR_NAME}}`
+`Date : {{SIGN_DATE_CREATOR}}`
 `Signature électronique : (référence) {{ESIGN_REF_CREATOR}}`
 
 `---`
@@ -1316,9 +1321,9 @@ Always show details
 `Ce guide explique comment **générer** et **enregistrer** l'empreinte (hash) du contrat PDF pour preuve d'intégrité.`
 
 `## 1) Pipeline recommandé`  
-`1. Générer le PDF du contrat depuis l'app.`    
-`2. Calculer le **hash SHA-256** du PDF.`    
-``3. Enregistrer : hash, horodatage, `CONTRACT_ID`, `USER_IDs`, IP, UA dans **AuditLog**.``    
+`1. Générer le PDF du contrat depuis l'app.`
+`2. Calculer le **hash SHA-256** du PDF.`
+``3. Enregistrer : hash, horodatage, `CONTRACT_ID`, `USER_IDs`, IP, UA dans **AuditLog**.``
 `4. (Option) Ancrer le hash dans une **blockchain publique** (ex. via un service tiers) — v2.`
 
 `## 2) Exemple Node.js (TypeScript)`  
@@ -1413,153 +1418,153 @@ Always show details
 
 `contract_content_en = """# Collaboration Contract — TrustMeBro (v1)`
 
-`**Contract reference (auto)**: {{CONTRACT_ID}}`    
-`**Issue date**: {{ISSUE_DATE}}`    
+`**Contract reference (auto)**: {{CONTRACT_ID}}`
+`**Issue date**: {{ISSUE_DATE}}`
 `**Governing law / Jurisdiction**: {{GOVERNING_LAW}} / {{JURISDICTION}}`  
 
 `---`
 
 `## 1) Parties`
 
-`**Brand (Client)**`    
-`- Company name: {{BRAND_COMPANY_NAME}}`    
-`- VAT ID (if applicable): {{BRAND_VAT_ID}}`    
-`- Address: {{BRAND_ADDRESS}}`    
-`- Country: {{BRAND_COUNTRY}}`    
-`- Representative: {{BRAND_REP_NAME}} ({{BRAND_REP_TITLE}})`    
+`**Brand (Client)**`
+`- Company name: {{BRAND_COMPANY_NAME}}`
+`- VAT ID (if applicable): {{BRAND_VAT_ID}}`
+`- Address: {{BRAND_ADDRESS}}`
+`- Country: {{BRAND_COUNTRY}}`
+`- Representative: {{BRAND_REP_NAME}} ({{BRAND_REP_TITLE}})`
 `- Email: {{BRAND_EMAIL}}`  
 
-`**Content Creator (Service Provider)**`    
-`- Name / Company: {{CREATOR_NAME}}`    
-`- VAT ID (if applicable): {{CREATOR_VAT_ID}}`    
-`- Address: {{CREATOR_ADDRESS}}`    
-`- Country: {{CREATOR_COUNTRY}}`    
-`- Email: {{CREATOR_EMAIL}}`    
+`**Content Creator (Service Provider)**`
+`- Name / Company: {{CREATOR_NAME}}`
+`- VAT ID (if applicable): {{CREATOR_VAT_ID}}`
+`- Address: {{CREATOR_ADDRESS}}`
+`- Country: {{CREATOR_COUNTRY}}`
+`- Email: {{CREATOR_EMAIL}}`
 `- Platform accounts: TikTok: {{CREATOR_TIKTOK}}, Instagram: {{CREATOR_IG}}, YouTube: {{CREATOR_YT}}`  
 
 `---`
 
 `## 2) Purpose and deliverable`
 
-`- **Promoted product / brand**: {{PRODUCT_NAME}}`    
-`- **Platform**: {{PLATFORM}} (TikTok / Instagram / YouTube / Other: {{PLATFORM_OTHER}})`    
-`- **Format & duration**: {{FORMAT_SPEC}} (e.g. 15–60s video)`    
-`- **Mandatory mentions**: {{MANDATORY_MENTIONS}}`    
-`- **Hashtags**: {{HASHTAGS}}`    
-`- **Call-to-action (CTA) links**: {{CTA_LINKS}}`    
-`- **Special requirements**: {{SPECIAL_REQUIREMENTS}}`    
+`- **Promoted product / brand**: {{PRODUCT_NAME}}`
+`- **Platform**: {{PLATFORM}} (TikTok / Instagram / YouTube / Other: {{PLATFORM_OTHER}})`
+`- **Format & duration**: {{FORMAT_SPEC}} (e.g. 15–60s video)`
+`- **Mandatory mentions**: {{MANDATORY_MENTIONS}}`
+`- **Hashtags**: {{HASHTAGS}}`
+`- **Call-to-action (CTA) links**: {{CTA_LINKS}}`
+`- **Special requirements**: {{SPECIAL_REQUIREMENTS}}`
 `- **Usage rights granted to Brand**: {{USAGE_RIGHTS}} (e.g. organic 12 months, paid media: NO/YES {{PAID_MEDIA_WINDOW}})`  
 
 `---`
 
 `## 3) Schedule`
 
-`- **Publication deadline**: {{DEADLINE_AT}} (TZ: {{TIMEZONE}})`    
-`- **Brand validation window**: {{AUTO_APPROVE_HOURS}} hours after submission (if no action, auto-approval).`    
+`- **Publication deadline**: {{DEADLINE_AT}} (TZ: {{TIMEZONE}})`
+`- **Brand validation window**: {{AUTO_APPROVE_HOURS}} hours after submission (if no action, auto-approval).`
 `- **Extension** (optional): 1 extension of {{EXTENSION_DAYS}} days if requested before the deadline and accepted by the other party.`  
 
 `---`
 
 `## 4) Compensation, deposits, and financial flows`
 
-`- **Currency**: {{CURRENCY}} (default v1: CHF)`    
-`- **Contract budget (Brand → Creator)**: {{BUDGET_AMOUNT}} {{CURRENCY}}`    
-`- **Creator deposit (refundable caution)**: {{CREATOR_DEPOSIT}} {{CURRENCY}}`    
-`- **Brand deposit (optional)**: {{BRAND_DEPOSIT}} {{CURRENCY}}`    
+`- **Currency**: {{CURRENCY}} (default v1: CHF)`
+`- **Contract budget (Brand → Creator)**: {{BUDGET_AMOUNT}} {{CURRENCY}}`
+`- **Creator deposit (refundable caution)**: {{CREATOR_DEPOSIT}} {{CURRENCY}}`
+`- **Brand deposit (optional)**: {{BRAND_DEPOSIT}} {{CURRENCY}}`
 `- **Platform fee (TrustMeBro)**: {{PLATFORM_FEE_PERCENT}}% deducted from the budget upon release.`  
 
-`**Rules**`    
-`1. Funds are held in escrow via the payment service provider.`    
-`2. Upon **compliant publication** and **validation** (or auto-approval), the platform:`    
-   `- triggers the **payout** of the budget (minus fees) to the Creator;`    
-   `- **refunds** the Creator's deposit;`    
-   `- **refunds** the Brand's deposit (if applicable).`    
-`3. **Mutual cancellation**: refunds according to agreement; by default, budget and deposits refunded in full.`    
-`4. **Expiration without submission**: refund of **budget** to Brand; Creator's deposit is **forfeited** (unless otherwise decided in dispute).`    
+`**Rules**`
+`1. Funds are held in escrow via the payment service provider.`
+`2. Upon **compliant publication** and **validation** (or auto-approval), the platform:`
+   `- triggers the **payout** of the budget (minus fees) to the Creator;`
+   `- **refunds** the Creator's deposit;`
+   `- **refunds** the Brand's deposit (if applicable).`
+`3. **Mutual cancellation**: refunds according to agreement; by default, budget and deposits refunded in full.`
+`4. **Expiration without submission**: refund of **budget** to Brand; Creator's deposit is **forfeited** (unless otherwise decided in dispute).`
 `5. **Dispute**: arbitration decision (see §8) determines release/refund/split.`  
 
 `---`
 
 `## 5) Delivery & verification process`
 
-`1. Creator publishes the content and submits in the app: **public URL**, **screenshots**, **post ID** if available.`    
-`2. Brand has {{AUTO_APPROVE_HOURS}}h to **Approve** or **Request revisions** (comment required).`    
-`3. After this delay, **auto-approval** applies.`    
+`1. Creator publishes the content and submits in the app: **public URL**, **screenshots**, **post ID** if available.`
+`2. Brand has {{AUTO_APPROVE_HOURS}}h to **Approve** or **Request revisions** (comment required).`
+`3. After this delay, **auto-approval** applies.`
 `4. Compliance includes: presence of product/brand, required mentions/hashtags/CTA, agreed format & timing.`  
 
 `---`
 
 `## 6) Intellectual property & usage rights`
 
-`- The **Creator** retains copyright in their content, subject to the **licenses** granted to the Brand:`    
-  `- **Organic usage** (non-sponsored) on Brand's channels: {{USAGE_ORG_DURATION}} months from publication.`    
-  `- **Paid media / whitelisting**: {{PAID_MEDIA_AUTH}} (YES/NO); if YES, window: {{PAID_MEDIA_WINDOW}}; territory: {{PAID_MEDIA_TERRITORIES}}.`    
+`- The **Creator** retains copyright in their content, subject to the **licenses** granted to the Brand:`
+  `- **Organic usage** (non-sponsored) on Brand's channels: {{USAGE_ORG_DURATION}} months from publication.`
+  `- **Paid media / whitelisting**: {{PAID_MEDIA_AUTH}} (YES/NO); if YES, window: {{PAID_MEDIA_WINDOW}}; territory: {{PAID_MEDIA_TERRITORIES}}.`
 `- Any adaptation, editing, subtitling, or paid boosting beyond the above requires the Creator's written consent.`  
 
 `---`
 
 `## 7) Confidentiality & compliance`
 
-`- Both parties agree to keep confidential any non-public information shared under this contract.`    
-`- Each party warrants compliance with applicable laws (advertising, image rights, platform ToS, tax, data protection).`    
+`- Both parties agree to keep confidential any non-public information shared under this contract.`
+`- Each party warrants compliance with applicable laws (advertising, image rights, platform ToS, tax, data protection).`
 `- Creator agrees to disclose any sponsored relationship (#ad, #sponsored) in accordance with local laws.`  
 
 `---`
 
 `## 8) Cancellation, expiration, disputes`
 
-`- **Mutual cancellation**: effective upon double consent in the app; refunds as per §4.`    
-`- **Expiration**: if no publication by deadline, apply rule §4.4.`    
-`- **Dispute**: may be initiated by either party. TrustMeBro (or designated arbitrator) decides within a reasonable delay and may resolve as:`    
-  `- **Released** (payout to Creator),`    
-  `- **Refunded** (refund to Brand),`    
-  `- **Split** (distribution).`    
+`- **Mutual cancellation**: effective upon double consent in the app; refunds as per §4.`
+`- **Expiration**: if no publication by deadline, apply rule §4.4.`
+`- **Dispute**: may be initiated by either party. TrustMeBro (or designated arbitrator) decides within a reasonable delay and may resolve as:`
+  `- **Released** (payout to Creator),`
+  `- **Refunded** (refund to Brand),`
+  `- **Split** (distribution).`
 `Decision is **binding within the platform**.`  
 
 `---`
 
 `## 9) Responsibilities & warranties`
 
-`- Creator warrants that content does not infringe third-party rights and complies with platform ToS.`    
-`- Brand warrants accuracy of product information and that it owns rights to provided trademarks & logos.`    
+`- Creator warrants that content does not infringe third-party rights and complies with platform ToS.`
+`- Brand warrants accuracy of product information and that it owns rights to provided trademarks & logos.`
 `- **TrustMeBro liability limitation**: role limited to technical facilitation; not responsible for indirect damages; liability capped at platform fees collected for the contract in question.`  
 
 `---`
 
 `## 10) Personal data`
 
-`- Each party acts as **data controller** for their own purposes; platform acts as **processor** for hosting and technical execution.`    
+`- Each party acts as **data controller** for their own purposes; platform acts as **processor** for hosting and technical execution.`
 `- Data subject rights, security, retention: as per TrustMeBro Privacy Policy.`  
 
 `---`
 
 `## 11) Governing law, jurisdiction, language`
 
-`- **Law**: {{GOVERNING_LAW}} (default: Switzerland).`    
-`- **Jurisdiction**: {{JURISDICTION}} (default: Fribourg).`    
+`- **Law**: {{GOVERNING_LAW}} (default: Switzerland).`
+`- **Jurisdiction**: {{JURISDICTION}} (default: Fribourg).`
 `- **Language**: English; in case of multiple versions, the English version prevails (unless otherwise agreed).`  
 
 `---`
 
 `## 12) Electronic consent & evidence`
 
-`- Parties accept **simple electronic signature** via TrustMeBro app.`    
-`- **Timestamp** and **hash** of the generated PDF are stored.`    
-`- Proof includes: metadata (IP, user agent), audit logs, payment receipts.`    
+`- Parties accept **simple electronic signature** via TrustMeBro app.`
+`- **Timestamp** and **hash** of the generated PDF are stored.`
+`- Proof includes: metadata (IP, user agent), audit logs, payment receipts.`
 `- (Option v2) Qualified signature via eIDAS provider (e.g. Skribble / DocuSign).`  
 
 `---`
 
 `## 13) Signatures`
 
-`**For the Brand**`    
-`Name: {{BRAND_REP_NAME}} — Title: {{BRAND_REP_TITLE}}`    
-`Date: {{SIGN_DATE_BRAND}}`    
+`**For the Brand**`
+`Name: {{BRAND_REP_NAME}} — Title: {{BRAND_REP_TITLE}}`
+`Date: {{SIGN_DATE_BRAND}}`
 `Electronic signature: (reference) {{ESIGN_REF_BRAND}}`
 
-`**For the Creator**`    
-`Name: {{CREATOR_NAME}}`    
-`Date: {{SIGN_DATE_CREATOR}}`    
+`**For the Creator**`
+`Name: {{CREATOR_NAME}}`
+`Date: {{SIGN_DATE_CREATOR}}`
 `Electronic signature: (reference) {{ESIGN_REF_CREATOR}}`
 
 `---`
@@ -1720,21 +1725,21 @@ Always show details
 """
 
 env\_example \= """\# E2E environment example  
- E2E\_BASE\_URL=http://localhost:3000
+ E2E\_BASE\_URL=<http://localhost:3000>
 
 # **Seeded brand user**
 
-E2E\_BRAND\_EMAIL=brand@example.com  
+E2E\_BRAND\_EMAIL=<brand@example.com>  
  E2E\_BRAND\_PASSWORD=Passw0rd\!
 
 # **Seeded creator user**
 
-E2E\_CREATOR\_EMAIL=creator@example.com  
+E2E\_CREATOR\_EMAIL=<creator@example.com>  
  E2E\_CREATOR\_PASSWORD=Passw0rd\!
 
 # **Seeded admin user**
 
-E2E\_ADMIN\_EMAIL=admin@example.com  
+E2E\_ADMIN\_EMAIL=<admin@example.com>  
  E2E\_ADMIN\_PASSWORD=Passw0rd\!  
  """
 
@@ -1845,7 +1850,7 @@ fixtures\_contracts\_ts \= """export const basicContract \= {
  creatorDepositCents: 10000,  
  brandDepositCents: 5000,  
  deadlineDaysFromNow: 7,  
- submissionUrl: 'https://www.tiktok.com/@creator/video/1234567890'  
+ submissionUrl: '<https://www.tiktok.com/@creator/video/1234567890>'  
  };  
  """
 
@@ -2444,27 +2449,26 @@ Si tu veux, je peux te générer :
 
 # **10) Intégration Paiement/Escrow (v1 pragmatique) — EU & US**
 
-- Stripe Connect (Standard) pour EU & US.
-- Dépôts = PaymentIntents capturés, remboursables selon issue.
-- Budget = capture à l'approbation (autorisation ~7j, reconfirmation si >7j).
-- Payout = Transfer vers compte connecté (moins les frais).
-- KYC/KYB via Stripe. US: SSN/EIN lorsque requis.
-- Devises supportées: CHF/EUR (EU), USD (US). `Contract.currency` pilote les montants.
-- Alternative MangoPay (UE) : wallets escrow natifs.
+* Stripe Connect (Standard) pour EU & US.
+* Dépôts = PaymentIntents capturés, remboursables selon issue.
+* Budget = capture à l'approbation (autorisation ~7j, reconfirmation si >7j).
+* Payout = Transfer vers compte connecté (moins les frais).
+* KYC/KYB via Stripe. US: SSN/EIN lorsque requis.
+* Devises supportées: CHF/EUR (EU), USD (US). `Contract.currency` pilote les montants.
+* Alternative MangoPay (UE) : wallets escrow natifs.
 
 # **11) Sécurité, conformité, légal — EU & US**
 
-- Signatures électroniques (simple) v1 ; eIDAS (AdES) v2.
-- EU/CH: GDPR/LPD (DPA, droits, effacement). US: CCPA/CPRA (opt‑out, droits d'accès/suppression), bannière cookies.
-- FTC (US): disclosures #ad/#sponsored exigés dans le brief et la soumission.
-- Sécurité: 2FA, rate‑limit, CSP/HSTS, RBAC, audit logs, S3 privé.
-- Juridique: UE par défaut CH/FR; US: État (Delaware/NY) à confirmer. Fiscalité 1099‑K via PSP si applicable.
+* Signatures électroniques (simple) v1 ; eIDAS (AdES) v2.
+* EU/CH: GDPR/LPD (DPA, droits, effacement). US: CCPA/CPRA (opt‑out, droits d'accès/suppression), bannière cookies.
+* FTC (US): disclosures #ad/#sponsored exigés dans le brief et la soumission.
+* Sécurité: 2FA, rate‑limit, CSP/HSTS, RBAC, audit logs, S3 privé.
+* Juridique: UE par défaut CH/FR; US: État (Delaware/NY) à confirmer. Fiscalité 1099‑K via PSP si applicable.
 
 # **12) Règles de libération/remboursement — multi‑région**
 
-- Payout créateur = budget – fee + restitution dépôt (devise du contrat)
-- Annulation/expiration/litige: règles identiques, paiements/restits dans la devise du contrat.
-- Monnaies: CHF/EUR/USD, stockées en centimes (entiers).
+* Payout créateur = budget – fee + restitution dépôt (devise du contrat)
+* Annulation/expiration/litige: règles identiques, paiements/restits dans la devise du contrat.
+* Monnaies: CHF/EUR/USD, stockées en centimes (entiers).
 
 ... (le reste du document inchangé) ...
-

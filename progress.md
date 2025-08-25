@@ -9,7 +9,7 @@ Legend: [DONE] implemented and typechecked; [PARTIAL] implemented but gaps remai
 - [DONE] Auth (NextAuth Credentials + PrismaAdapter), basic RBAC guards
 - [DONE] Core REST endpoints for contracts, funding, submission, review, disputes, admin force actions
 - [DONE] Stripe Connect (test): account onboarding link + PaymentIntent creation for funding + signed webhook handler
-- [DONE] Minimal UI: sign-in, dashboard, new contract, contract detail actions, admin console
+- [DONE] Minimal UI: sign-in, signup, dashboard, profile/settings, new contract, contract detail actions, admin console
 - [DONE] Auto-approve job endpoint
 - [DONE] Cursor rules under `.cursor/rules/docs-and-progress.mdc` to enforce spec/progress doc updates
 - [DONE] Cursor rule `.cursor/rules/commit-messages.mdc` to always suggest a git commit message after changes
@@ -41,7 +41,7 @@ Gaps/TODO (coding — Cursor):
 
 Files: `src/lib/auth.ts`, `src/middleware.ts`, `src/app/api/auth/[...nextauth]/route.ts`
 
-- [DONE] NextAuth Credentials provider; JWT contains `role`, PrismaAdapter
+- [DONE] NextAuth Credentials provider; JWT contains `role`, PrismaAdapter; signup endpoint and page added
 - [DONE] Middleware to protect `/api/*` and app sections (`/dashboard`, `/contracts`, `/admin`)
 - [PARTIAL] Only Credentials; no Google/Apple OAuth yet; no 2FA
 
@@ -151,7 +151,8 @@ Gaps/TODO (coding — Cursor):
 
 Implemented pages:
 
-- [DONE] `signin` (Credentials)
+- [DONE] `signin` (Credentials), `signup`
+- [DONE] `profile` with editable profile and settings forms
 - [DONE] `dashboard` with contract cards and state pills (`data-testid="state-..."`)
 - [DONE] `contracts/new` wizard (single page MVP) with all required inputs; requires manual `creatorId`
 - [DONE] `contracts/[id]` with actions: fund buttons, submit, approve
