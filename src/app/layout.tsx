@@ -58,10 +58,10 @@ export default function RootLayout({
               <span>© {new Date().getFullYear()} TrustMeBro</span>
             </div>
             <div className="md:ml-auto flex items-center gap-4">
-              <a href="#" className="hover:underline">Security</a>
-              <a href="#" className="hover:underline">Privacy</a>
-              <a href="#" className="hover:underline">Status</a>
-              <a href="#" className="hover:underline">Contact</a>
+              <Link href="/security" className="hover:underline">Security</Link>
+              <Link href="/privacy" className="hover:underline">Privacy</Link>
+              <Link href="/status" className="hover:underline">Status</Link>
+              <Link href="/contact" className="hover:underline">Contact</Link>
             </div>
           </div>
         </footer>
