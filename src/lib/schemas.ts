@@ -19,4 +19,31 @@ export const CreateContractSchema = z.object({
 
 export type CreateContractInput = z.infer<typeof CreateContractSchema>
 
+// Auth & Profile
+export const SignUpSchema = z.object({
+  name: z.string().min(1).max(80),
+  email: z.string().email(),
+  password: z.string().min(8),
+  role: z.enum(['brand', 'creator']).default('creator'),
+})
+export type SignUpInput = z.infer<typeof SignUpSchema>
+
+export const UpdateProfileSchema = z.object({
+  companyName: z.string().max(120).nullable().optional(),
+  vatId: z.string().max(50).nullable().optional(),
+  address: z.string().max(200).nullable().optional(),
+  country: z.string().max(2).nullable().optional(),
+})
+export type UpdateProfileInput = z.infer<typeof UpdateProfileSchema>
+
+export const UpdateSettingsSchema = z.object({
+  theme: z.enum(['system', 'light', 'dark']).optional(),
+  language: z.string().min(2).max(5).optional(),
+  region: z.string().min(2).max(5).optional(),
+  timeZone: z.string().min(1).max(60).optional(),
+  emailNotifications: z.boolean().optional(),
+  marketingEmails: z.boolean().optional(),
+})
+export type UpdateSettingsInput = z.infer<typeof UpdateSettingsSchema>
+
 

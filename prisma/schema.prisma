@@ -100,6 +100,7 @@ model User {
   updatedAt    DateTime @updatedAt
 
   profile      Profile?
+  settings     UserSettings?
   // Relations
   brandContracts   Contract[] @relation("BrandContracts")
   creatorContracts Contract[] @relation("CreatorContracts")
@@ -124,6 +125,18 @@ model Profile {
   kycStatus    String? // mirrored from PSP
 
   user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserSettings {
+  userId             String   @id
+  theme              String   @default("system") // system | light | dark
+  language           String   @default("en")
+  region             String   @default("eu")
+  timeZone           String   @default("UTC")
+  emailNotifications Boolean  @default(true)
+  marketingEmails    Boolean  @default(false)
+
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 /// Contrat entre une marque (brand) et un créateur (creator)

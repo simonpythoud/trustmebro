@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run --reporter=verbose",
     "postinstall": "prisma generate",
-    "deploy:seed": "node --import=tsx ./prisma/seed.ts || node ./prisma/seed.ts",
+    "deploy:seed": "tsx ./prisma/seed.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:deploy": "prisma migrate deploy && npm run deploy:seed"
@@ -40,6 +40,7 @@
     "eslint-config-next": "15.5.0",
     "prisma": "^6.14.0",
     "tailwindcss": "^4",
+    "tsx": "^4.20.5",
     "typescript": "^5",
     "vitest": "^2.1.9"
   }
