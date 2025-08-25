@@ -10,7 +10,7 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
-	serverExternalPackages: ['openid-client', 'jose'],
+	serverExternalPackages: ['openid-client'],
 	eslint: {
 		ignoreDuringBuilds: true,
 	},

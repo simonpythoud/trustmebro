@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
-export default async function Home({ searchParams }: { searchParams?: { [key: string]: string | string[] | undefined } }) {
-	const sp = searchParams ?? {}
-	const rawLang = Array.isArray(sp.lang) ? sp.lang[0] : sp.lang
+export default async function Home({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+	const sp = await searchParams
+	const rawLang = Array.isArray(sp?.lang) ? sp.lang[0] : sp?.lang
 	const lang = rawLang === 'fr' ? 'fr' : 'en'
-	const rawRegion = Array.isArray(sp.region) ? sp.region[0] : sp.region
+	const rawRegion = Array.isArray(sp?.region) ? sp.region[0] : sp?.region
 	const region = rawRegion === 'us' ? 'us' : 'eu'
 	const copy = {
 		en: {
