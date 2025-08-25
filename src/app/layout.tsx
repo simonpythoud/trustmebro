@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "TrustMeBro — Secure collaborations for brands & creators",
-  description: "Escrow + digital contracts for influencer collaborations. Dual deposits, verified deliverables, and automatic payouts.",
+  description: "Escrow + digital contracts for influencer collaborations (EU & US). Dual deposits, verified deliverables, automatic payouts. GDPR/FTC aware.",
 };
 
 export default function RootLayout({
@@ -42,6 +42,9 @@ export default function RootLayout({
               <span className="mx-2 text-foreground/30">|</span>
               <Link href="/?lang=en" className="hover:underline">EN</Link>
               <Link href="/?lang=fr" className="hover:underline">FR</Link>
+              <span className="mx-2 text-foreground/30">/</span>
+              <Link href="/?region=eu" className="hover:underline">EU</Link>
+              <Link href="/?region=us" className="hover:underline">US</Link>
             </nav>
           </div>
         </header>

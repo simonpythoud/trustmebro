@@ -9,6 +9,7 @@ export const CreateContractSchema = z.object({
     hashtags: z.array(z.string()).max(10),
   }),
   creatorId: z.string().min(3),
+  currency: z.enum(['CHF', 'EUR', 'USD']).optional(),
   budgetCents: z.number().int().min(1000),
   creatorDepositCents: z.number().int().min(0),
   brandDepositCents: z.number().int().min(0),

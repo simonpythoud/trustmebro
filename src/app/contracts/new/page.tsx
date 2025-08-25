@@ -9,6 +9,14 @@ export default function NewContractPage() {
   const [budget, setBudget] = useState('600')
   const [depCreator, setDepCreator] = useState('100')
   const [depBrand, setDepBrand] = useState('50')
+  const [currency, setCurrency] = useState<'CHF'|'EUR'|'USD'>(()=>{
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href)
+      const region = url.searchParams.get('region')
+      return region === 'us' ? 'USD' : 'CHF'
+    }
+    return 'CHF'
+  })
   const [deadline, setDeadline] = useState<string>('')
   const [creatorId, setCreatorId] = useState('')
   const [msg, setMsg] = useState<string|null>(null)
@@ -27,6 +35,7 @@ export default function NewContractPage() {
             brief,
             deliverable: { platform, durationSec: 60, hashtags: hashtags.split(',').map(s=>s.trim()).filter(Boolean) },
             creatorId,
+            currency,
             budgetCents: Math.round(parseFloat(budget)*100),
             creatorDepositCents: Math.round(parseFloat(depCreator)*100),
             brandDepositCents: Math.round(parseFloat(depBrand)*100),
@@ -64,17 +73,25 @@ export default function NewContractPage() {
         </div>
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm mb-1">Budget (CHF)</label>
+            <label className="block text-sm mb-1">Budget ({currency})</label>
             <input data-testid="contract-budget" className="border rounded w-full px-3 py-2" value={budget} onChange={(e)=>setBudget(e.target.value)} />
           </div>
           <div>
-            <label className="block text-sm mb-1">Creator deposit (CHF)</label>
+            <label className="block text-sm mb-1">Creator deposit ({currency})</label>
             <input data-testid="contract-creator-deposit" className="border rounded w-full px-3 py-2" value={depCreator} onChange={(e)=>setDepCreator(e.target.value)} />
           </div>
           <div>
-            <label className="block text-sm mb-1">Brand deposit (CHF)</label>
+            <label className="block text-sm mb-1">Brand deposit ({currency})</label>
             <input data-testid="contract-brand-deposit" className="border rounded w-full px-3 py-2" value={depBrand} onChange={(e)=>setDepBrand(e.target.value)} />
           </div>
+        </div>
+        <div>
+          <label className="block text-sm mb-1">Currency</label>
+          <select className="border rounded w-full px-3 py-2" value={currency} onChange={(e)=>setCurrency(e.target.value as any)}>
+            <option value="CHF">CHF</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+          </select>
         </div>
         <div>
           <label className="block text-sm mb-1">Deadline</label>

@@ -37,6 +37,7 @@ export async function POST(req: Request) {
 			hashtags: input.deliverable.hashtags,
 			productName: input.title,
 			productValueCents: input.productValueCents,
+			currency: (input as any).currency ?? 'CHF',
 			budgetCents: input.budgetCents,
 			creatorDepositCents: input.creatorDepositCents,
 			brandDepositCents: input.brandDepositCents,

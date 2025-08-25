@@ -4,6 +4,8 @@ export default async function Home({ searchParams }: { searchParams?: { [key: st
 	const sp = searchParams ?? {}
 	const rawLang = Array.isArray(sp.lang) ? sp.lang[0] : sp.lang
 	const lang = rawLang === 'fr' ? 'fr' : 'en'
+	const rawRegion = Array.isArray(sp.region) ? sp.region[0] : sp.region
+	const region = rawRegion === 'us' ? 'us' : 'eu'
 	const copy = {
 		en: {
 			tagline: 'Built for brands and creators',
@@ -113,6 +115,8 @@ export default async function Home({ searchParams }: { searchParams?: { [key: st
 		},
 	} as const
 	const t = copy[lang]
+	const compBullet = region === 'us' ? (lang === 'fr' ? '• Conformité US : disclosures FTC (#ad) & prise en compte CCPA.' : '• Built for US compliance: FTC disclosures & CCPA awareness.') : t.whyBullet4
+	const currencyTile = region === 'us' ? 'USD' : 'CHF'
 	return (
 		<main>
 			{/* Hero */}
@@ -189,7 +193,7 @@ export default async function Home({ searchParams }: { searchParams?: { [key: st
 								<li>{t.whyBullet1}</li>
 								<li>{t.whyBullet2}</li>
 								<li>{t.whyBullet3}</li>
-								<li>{t.whyBullet4}</li>
+								<li>{compBullet}</li>
 							</ul>
 							<div className="pt-2">
 								<Link href="/signin" className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:opacity-95 transition">{t.whyCta}</Link>
@@ -210,7 +214,7 @@ export default async function Home({ searchParams }: { searchParams?: { [key: st
 									<div className="text-xs text-foreground/60">{t.kpiMutual}</div>
 								</div>
 								<div className="rounded-lg border border-foreground/10 p-4">
-									<div className="text-3xl font-semibold"><span className="align-top">CHF</span></div>
+									<div className="text-3xl font-semibold"><span className="align-top">{currencyTile}</span></div>
 									<div className="text-xs text-foreground/60">{t.kpiCurrency}</div>
 								</div>
 							</div>
