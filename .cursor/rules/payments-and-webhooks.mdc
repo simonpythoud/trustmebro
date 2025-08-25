@@ -1,0 +1,22 @@
+---
+globs: src/app/api/webhooks/**/route.ts,src/lib/stripe.ts,src/app/api/stripe/**/route.ts
+description: Stripe client usage, webhook verification, idempotency, and Connect onboarding
+---
+
+- Client: import `stripe` from [src/lib/stripe.ts](mdc:src/lib/stripe.ts). Use Node runtime.
+- Webhooks: read raw body with `await req.text()` and verify using `stripe.webhooks.constructEvent(text, sig, whsec)`. On failure, return 400.
+- Persist only sanitized events; use `serializeStripeEvent` before saving to DB.
+- Funding success: on `payment_intent.succeeded`, mark `Funding.status = 'succeeded'` by PI id, then if all required funds are in, set `Contract.state = 'Funded'` and append a `ContractEvent` and `AuditLog`. See [src/app/api/webhooks/psp/route.ts](mdc:src/app/api/webhooks/psp/route.ts).
+- Connect onboarding: ensure authenticated user, create account if missing, upsert `Profile.pspAccountId`, and create an account link using `NEXTAUTH_URL` for return/refresh. See [src/app/api/stripe/connect/onboard/route.ts](mdc:src/app/api/stripe/connect/onboard/route.ts).
+- Idempotency: when creating Stripe resources (PI, transfers, etc.), prefer idempotency keys; design updates to be idempotent in DB.
+
+```ts
+export const runtime = 'nodejs'
+export async function POST(req: Request) {
+  const sig = req.headers.get('stripe-signature')
+  const text = await req.text()
+  const event = stripe.webhooks.constructEvent(text, sig!, process.env.STRIPE_WEBHOOK_SECRET!)
+  // ... handle event
+  return Response.json({ received: true })
+}
+```

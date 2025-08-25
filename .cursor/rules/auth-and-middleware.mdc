@@ -1,0 +1,21 @@
+---
+globs: src/app/**/route.ts,src/app/**/page.tsx
+description: Auth, session access, role checks, and middleware expectations
+---
+
+- Session: use `auth()` from [src/lib/auth.ts](mdc:src/lib/auth.ts). Session embeds `user.role` via JWT callbacks.
+- Protect routes/pages: check `session?.user?.email`; return 401 or redirect as needed.
+- Role checks: use `session.user.role` values `admin | brand | creator` for authorization decisions.
+- NextAuth route: keep re-export pattern in [src/app/api/auth/[...nextauth]/route.ts](mdc:src/app/api/auth/[...nextauth]/route.ts).
+- Middleware: [src/middleware.ts](mdc:src/middleware.ts) is pass-through; do not rely on it for auth. Enforce per route/page.
+
+```ts
+import { auth } from '@/lib/auth'
+
+export async function GET() {
+  const session = await auth()
+  if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  // ...
+  return Response.json({ ok: true })
+}
+```

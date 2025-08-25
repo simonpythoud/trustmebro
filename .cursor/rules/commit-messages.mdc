@@ -1,0 +1,8 @@
+---
+alwaysApply: true
+---
+- At the end of each conversation where code or docs were modified, provide a suggested git commit message.
+- Style:
+  - Imperative, concise, scope-prefixed when useful (e.g., "api: add payouts flow and capture on approve").
+  - Include a short body when multiple files/areas were touched, listing key impacts.
+- If no changes occurred, explicitly state that no commit is needed.

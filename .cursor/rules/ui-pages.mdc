@@ -1,0 +1,45 @@
+---
+globs: src/app/**/*.tsx
+description: UI/Pages conventions for server and client components in App Router
+---
+
+- Server components can read session via `import { auth } from 'auth'` and `await auth()`; roles are on `session.user.role`.
+- Client components should call internal APIs (`/api/...`) for data; do not import Prisma or server-only libs client-side.
+- Use server actions (`'use server'`) for form `action`s that perform mutations via the API; avoid passing secrets to the client.
+- For SSR fetch to internal APIs, prefer absolute URL using `NEXTAUTH_URL` to avoid relative URL pitfalls.
+- Keep UI minimal and stateless; all stateful operations should round-trip to API routes.
+- Tailwind is available; follow the simple utility-first style seen in existing pages.
+
+Examples
+
+```tsx
+// Server component using auth and SSR fetch
+import { auth } from 'auth'
+
+export default async function ContractDetail({ params }: { params: Promise<{ id: string }>}) {
+  const { id } = await params
+  const session = await auth()
+  if (!session?.user) return <main className="p-6">Unauthorized</main>
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}`, { cache: 'no-store' })
+  if (!res.ok) return <main className="p-6">Not found</main>
+  const contract = await res.json()
+  return <main className="p-6">{contract.title}</main>
+}
+```
+
+```tsx
+// Client component calling API
+"use client"
+import { useEffect, useState } from 'react'
+
+export default function DashboardPage() {
+  const [items, setItems] = useState<any[]>([])
+  useEffect(() => {
+    fetch('/api/contracts?role=brand')
+      .then(r => r.ok ? r.json() : [])
+      .then(setItems)
+      .catch(() => setItems([]))
+  }, [])
+  return <div>{items.length} items</div>
+}
+```

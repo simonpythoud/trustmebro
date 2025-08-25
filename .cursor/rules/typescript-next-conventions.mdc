@@ -1,0 +1,26 @@
+---
+globs: src/**/*.ts,src/**/*.tsx
+description: TypeScript/Next.js conventions used in this repo
+---
+
+- Imports: prefer `@/...` alias over long relative paths.
+- API handlers: `export async function GET/POST/...` or re-export from `@/auth` when appropriate; never default export route handlers.
+- Validation: use zod schemas from [src/lib/schemas.ts](mdc:src/lib/schemas.ts) at the route boundary; reject invalid input with 400.
+- Database: import `prisma` from [src/lib/prisma.ts](mdc:src/lib/prisma.ts); never instantiate `new PrismaClient()` in routes/components.
+- Responses: return `Response.json({ ... }, { status })`; avoid throwing uncaught errors.
+- Runtime: set `export const runtime = 'nodejs'` for anything touching Prisma or Stripe.
+- Auth: on the server, call `auth()` from [src/lib/auth.ts](mdc:src/lib/auth.ts) to read the session; roles are available at `session.user.role`.
+- Types: keep `strict` TS, avoid `any`; derive `type` from zod with `z.infer` when needed.
+
+```ts
+import { CreateContractSchema } from '@/lib/schemas'
+import { prisma } from '@/lib/prisma'
+
+export const runtime = 'nodejs'
+
+export async function POST(req: Request) {
+  const input = CreateContractSchema.parse(await req.json())
+  // ... use prisma
+  return Response.json({ ok: true })
+}
+```

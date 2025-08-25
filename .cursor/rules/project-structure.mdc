@@ -1,0 +1,25 @@
+---
+alwaysApply: true
+description: Project structure, key entry points, path aliases, and runtime boundaries
+---
+
+- App lives in [web](mdc:web) (Next.js App Router).
+- Routes/pages are under [src/app](mdc:src/app).
+- Auth configured in [src/lib/auth.ts](mdc:src/lib/auth.ts) and wired via NextAuth route [src/app/api/auth/[...nextauth]/route.ts](mdc:src/app/api/auth/[...nextauth]/route.ts).
+- Global middleware at [src/middleware.ts](mdc:src/middleware.ts).
+- Environment handling in [src/lib/env.ts](mdc:src/lib/env.ts).
+- Database:
+  - Schema in [/prisma/schema.prisma](mdc:/prisma/schema.prisma)
+  - Prisma client singleton in [src/lib/prisma.ts](mdc:src/lib/prisma.ts) (generated types under `src/generated/prisma`)
+- Payments:
+  - Stripe client in [src/lib/stripe.ts](mdc:src/lib/stripe.ts)
+  - PSP webhook at [src/app/api/webhooks/psp/route.ts](mdc:src/app/api/webhooks/psp/route.ts)
+  - Connect onboarding at [src/app/api/stripe/connect/onboard/route.ts](mdc:src/app/api/stripe/connect/onboard/route.ts)
+- Security headers configured in [/next.config.ts](mdc:/next.config.ts).
+- Path aliases: `@/*` → `src/*` as defined in [/tsconfig.json](mdc:/tsconfig.json). Prefer `@/lib/...` and `@/generated/...` imports.
+- Runtime: Use Node.js runtime when using Prisma/Stripe.
+
+```ts
+// In any route using Prisma or Stripe
+export const runtime = 'nodejs'
+```

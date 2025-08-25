@@ -409,163 +409,163 @@ https://nextjs.org/docs/messages/module-not-found
  ✓ Compiled /signin in 23ms
  GET /signin 200 in 121ms
  GET /contracts/new 200 in 59ms
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.rkhmusny07m'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.rkhmusny07m'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.rkhmusny07m'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.rkhmusny07m'
 }
  ○ Compiling /_error ...
  ✓ Compiled /_error in 627ms
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.ubekwvw7uie'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.ubekwvw7uie'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.ubekwvw7uie'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.ubekwvw7uie'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.rkhmusny07m'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.rkhmusny07m'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.rkhmusny07m'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.rkhmusny07m'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.0q9e55r9615b'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.0q9e55r9615b'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.0q9e55r9615b'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.0q9e55r9615b'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.62ayj01yvnw'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.62ayj01yvnw'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.62ayj01yvnw'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.62ayj01yvnw'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.s86xyx9861s'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.s86xyx9861s'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.s86xyx9861s'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.s86xyx9861s'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.eehanl0z7o'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.eehanl0z7o'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.eehanl0z7o'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.eehanl0z7o'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.s86xyx9861s'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.s86xyx9861s'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.s86xyx9861s'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.s86xyx9861s'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.9i1xfmdq9ft'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.9i1xfmdq9ft'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.9i1xfmdq9ft'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.9i1xfmdq9ft'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.chvkthw6c6u'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.chvkthw6c6u'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.chvkthw6c6u'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.chvkthw6c6u'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.t246t1jcez9'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.t246t1jcez9'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.t246t1jcez9'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.t246t1jcez9'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.d4bnt8bwxv'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.d4bnt8bwxv'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.d4bnt8bwxv'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.d4bnt8bwxv'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.t246t1jcez9'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.t246t1jcez9'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.t246t1jcez9'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.t246t1jcez9'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.60ed1dira8o'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.60ed1dira8o'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.60ed1dira8o'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.60ed1dira8o'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.857ny8qbc7j'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.857ny8qbc7j'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.857ny8qbc7j'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.857ny8qbc7j'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.hmea70fpo2'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.hmea70fpo2'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.hmea70fpo2'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.hmea70fpo2'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.lb1k6n3falo'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.lb1k6n3falo'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.lb1k6n3falo'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.lb1k6n3falo'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.hmea70fpo2'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.hmea70fpo2'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.hmea70fpo2'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.hmea70fpo2'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.rc3xtlanjj'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.rc3xtlanjj'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.rc3xtlanjj'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.rc3xtlanjj'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.dsl7y1qsrx'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.dsl7y1qsrx'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.dsl7y1qsrx'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.dsl7y1qsrx'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.va964fixy1e'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.va964fixy1e'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.va964fixy1e'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.va964fixy1e'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.ow9n361h91k'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.ow9n361h91k'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.ow9n361h91k'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.ow9n361h91k'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.va964fixy1e'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.va964fixy1e'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.va964fixy1e'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.va964fixy1e'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.ukql2pfiucp'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.ukql2pfiucp'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.ukql2pfiucp'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.ukql2pfiucp'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.x86ui2f5iqd'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.x86ui2f5iqd'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.x86ui2f5iqd'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.x86ui2f5iqd'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.ykln9pauyw'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.ykln9pauyw'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.ykln9pauyw'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.ykln9pauyw'
 }
  ⨯ ./node_modules/next-auth/lib/client.js:3:1
 Module not found: Can't resolve '@auth/core/errors'
@@ -680,71 +680,71 @@ https://nextjs.org/docs/messages/module-not-found
 
 
  ✓ Compiled in 506ms
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.u7393jnqspk'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.u7393jnqspk'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.u7393jnqspk'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.u7393jnqspk'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.oynkhseqo9m'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.oynkhseqo9m'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.oynkhseqo9m'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.oynkhseqo9m'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.u7393jnqspk'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.u7393jnqspk'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.u7393jnqspk'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.u7393jnqspk'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.9jd2jj2fg0u'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.9jd2jj2fg0u'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.9jd2jj2fg0u'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.9jd2jj2fg0u'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.n1ls8rpgq0g'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.n1ls8rpgq0g'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.n1ls8rpgq0g'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.n1ls8rpgq0g'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.9qj7agl3mvf'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.9qj7agl3mvf'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.9qj7agl3mvf'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.9qj7agl3mvf'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.bckj9l8ay75'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.bckj9l8ay75'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.bckj9l8ay75'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.bckj9l8ay75'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.9qj7agl3mvf'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.9qj7agl3mvf'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.9qj7agl3mvf'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.9qj7agl3mvf'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.b168dm054zn'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.b168dm054zn'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.b168dm054zn'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.b168dm054zn'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.jq8zbbfu3u'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.jq8zbbfu3u'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.jq8zbbfu3u'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.jq8zbbfu3u'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.xtvfmm4y83'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.xtvfmm4y83'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.xtvfmm4y83'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.xtvfmm4y83'
 }
  ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
    ▲ Next.js 15.5.0 (Turbopack)
@@ -784,42 +784,42 @@ https://nextjs.org/docs/messages/module-not-found
  ✓ Ready in 857ms
  ○ Compiling / ...
  ✓ Compiled / in 1583ms
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.wzd3eta3mvb'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.wzd3eta3mvb'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.wzd3eta3mvb'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.wzd3eta3mvb'
 }
  ○ Compiling /_error ...
  ✓ Compiled /_error in 647ms
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.s6w2v1s8vlm'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.s6w2v1s8vlm'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.s6w2v1s8vlm'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.s6w2v1s8vlm'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.wzd3eta3mvb'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.wzd3eta3mvb'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.wzd3eta3mvb'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.wzd3eta3mvb'
 }
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.dcmjdstc9gk'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.dcmjdstc9gk'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.dcmjdstc9gk'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.dcmjdstc9gk'
 }
-[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.e5uqvlkyx6b'] {
+[Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.e5uqvlkyx6b'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.e5uqvlkyx6b'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.e5uqvlkyx6b'
 }
  ✓ Compiled /favicon.ico in 167ms
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.yp109l9dzwn'] {
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.yp109l9dzwn'] {
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
-  path: '/Users/simpyt/Development/trustmebro/web/.next/static/development/_buildManifest.js.tmp.yp109l9dzwn'
+  path: '/Users/simpyt/Development/trustmebro//.next/static/development/_buildManifest.js.tmp.yp109l9dzwn'
 }

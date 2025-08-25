@@ -1,0 +1,18 @@
+---
+globs: TrustMeBro.md,progress.md,/**
+description: Source of truth and progress tracking enforcement
+---
+
+- Use `TrustMeBro.md` as the canonical high-level source for business goals, requirements, and technical direction.
+- When relevant changes are requested or discovered (scope, requirements, flows, strategy), update `TrustMeBro.md` immediately to keep it current.
+- Always check and update `progress.md`:
+  - Add newly requested tasks under the appropriate sections and mark them [TODO].
+  - When tasks are completed or partially completed, update to [DONE]/[PARTIAL] with a brief impact note.
+  - Keep a concise history of achievements, deltas, and known issues.
+- Before coding, scan `TrustMeBro.md` to align with goals/constraints; after meaningful changes (features, endpoints, jobs, flows), reflect status updates in `progress.md`.
+- PR hygiene (when applicable):
+  - Link to the exact sections updated in `TrustMeBro.md` and `progress.md`.
+  - Mention any impact on KPIs or acceptance criteria when relevant.
+- Style:
+  - Preserve existing indentation/formatting in edited files.
+  - Keep commit messages concise and imperative (e.g., "Add payout flow; update spec & progress").

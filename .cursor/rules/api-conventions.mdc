@@ -1,0 +1,27 @@
+---
+globs: src/app/api/**/route.ts
+description: API conventions for routes (handlers, auth, validation, prisma, and runtime)
+---
+
+- Handlers: export named `GET/POST/PUT/...` functions; no default exports. Use `NextRequest` only if you need `req.nextUrl`.
+- Auth: read session via `auth()`; require `session.user.email` for authenticated endpoints; check `session.user.role` for RBAC.
+- Validation: use zod schemas from [src/lib/schemas.ts](mdc:src/lib/schemas.ts) (`safeParse` or `parse`); on invalid, return 400 with flattened error.
+- Runtime: include `export const runtime = 'nodejs'` for any route using Prisma or Stripe.
+- Prisma: import the singleton from [src/lib/prisma.ts](mdc:src/lib/prisma.ts). Keep queries selective; confirm ownership/visibility for reads.
+- Stripe: import client from [src/lib/stripe.ts](mdc:src/lib/stripe.ts); use idempotent, auditable changes.
+- Errors: prefer explicit `401/403/404/400`; avoid throwing; always return `Response.json` or `new Response`.
+- Side-effects: write `contractEvent` and `auditLog` for sensitive transitions.
+
+```ts
+import { auth } from '@/lib/auth'
+import { prisma } from '@/lib/prisma'
+
+export const runtime = 'nodejs'
+
+export async function GET(req: Request) {
+  const session = await auth()
+  if (!session?.user?.email) return new Response('Unauthorized', { status: 401 })
+  // ...
+  return Response.json({ ok: true })
+}
+```
