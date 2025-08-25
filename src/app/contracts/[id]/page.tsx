@@ -1,4 +1,5 @@
 import { auth } from '@/lib/auth'
+import { StateBadge } from '../../components/StateBadge'
 
 export const runtime = 'nodejs'
 
@@ -24,26 +25,27 @@ export default async function ContractDetail({ params }: { params: Promise<{ id:
 		await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}/review`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decision: 'approve' }) })
 	}
 	return (
-		<main className="p-6 space-y-4">
-			<h1 className="text-2xl font-semibold">{contract.title}</h1>
-			<p>{contract.brief}</p>
-			<div className="flex gap-2 items-center">
-				<span className="text-sm text-gray-500">State:</span>
-				<span data-testid={`state-${contract.state}`}>{contract.state}</span>
+		<main className="mx-auto max-w-4xl px-6 py-10 space-y-6">
+			<div className="flex items-start justify-between">
+				<div>
+					<h1 className="text-3xl font-semibold">{contract.title}</h1>
+					<p className="mt-2 text-foreground/70">{contract.brief}</p>
+				</div>
+				<div className="mt-1" data-testid={`state-${contract.state}`}><StateBadge state={contract.state} /></div>
 			</div>
 			{role==='brand' && (
 				<form action={async ()=> fund('brand_budget')}>
-					<button data-testid="fund-brand-budget" className="bg-black text-white rounded px-3 py-1">Fund budget</button>
+					<button data-testid="fund-brand-budget" className="inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90">Fund budget</button>
 				</form>
 			)}
 			{role==='brand' && contract.brandDepositCents>0 && (
 				<form action={async ()=> fund('brand_deposit')}>
-					<button data-testid="fund-brand-deposit" className="bg-black text-white rounded px-3 py-1">Fund brand deposit</button>
+					<button data-testid="fund-brand-deposit" className="inline-flex items-center rounded-md border border-foreground/20 px-4 py-2 text-sm hover:bg-foreground/5">Fund brand deposit</button>
 				</form>
 			)}
 			{role==='creator' && contract.creatorDepositCents>0 && (
 				<form action={async ()=> fund('creator_deposit')}>
-					<button data-testid="fund-creator-deposit" className="bg-black text-white rounded px-3 py-1">Fund creator deposit</button>
+					<button data-testid="fund-creator-deposit" className="inline-flex items-center rounded-md border border-foreground/20 px-4 py-2 text-sm hover:bg-foreground/5">Fund creator deposit</button>
 				</form>
 			)}
 			{role==='creator' && (
@@ -52,12 +54,12 @@ export default async function ContractDetail({ params }: { params: Promise<{ id:
 					await fetch(`${process.env.NEXTAUTH_URL}/api/contracts/${id}/submit`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url: 'https://example.com', platform: 'tiktok', screenshots: [], notes: '' }) })
 				}}>
 					<input type="hidden" value="https://example.com" />
-					<button data-testid="submission-send" className="bg-blue-600 text-white rounded px-3 py-1">Submit</button>
+					<button data-testid="submission-send" className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:opacity-95">Submit</button>
 				</form>
 			)}
 			{role==='brand' && (
 				<form action={approve}>
-					<button data-testid="review-approve" className="bg-green-600 text-white rounded px-3 py-1">Approve</button>
+					<button data-testid="review-approve" className="inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:opacity-95">Approve</button>
 				</form>
 			)}
 		</main>
