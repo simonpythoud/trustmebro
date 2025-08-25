@@ -21,6 +21,7 @@ export default function ProfilePage() {
   const [error, setError] = useState<string | null>(null)
   const [profile, setProfile] = useState<Profile>({})
   const [settings, setSettings] = useState<Settings | null>(null)
+  const [role, setRole] = useState<string | null>(null)
 
   useEffect(() => {
     ;(async () => {
@@ -30,6 +31,7 @@ export default function ProfilePage() {
         const j = await r.json()
         setProfile(j.profile ?? {})
         setSettings(j.settings ?? null)
+        setRole(j.role ?? null)
       } catch (e: any) {
         setError(e.message ?? 'Failed to load')
       } finally {
@@ -45,6 +47,7 @@ export default function ProfilePage() {
     <div className="mx-auto max-w-3xl px-6 py-10 grid gap-6">
       <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">
         <h2 className="font-semibold mb-4">Profile</h2>
+        <p className="mb-4 text-sm text-foreground/70">Account type: <span className="font-medium">{role === 'brand' ? 'Brand' : role === 'creator' ? 'Creator/Influencer' : '—'}</span></p>
         <form
           className="grid gap-4 md:grid-cols-2"
           onSubmit={async (e) => {
