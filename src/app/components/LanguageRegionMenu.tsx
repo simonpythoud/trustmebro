@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Locale } from '@/lib/i18n'
 
-type Region = 'eu' | 'us' | 'apac' | 'latam' | 'mena'
+type Region = 'eu' | 'us' | 'ca' | 'mx' | 'apac' | 'latam' | 'mena'
 
-type Combo = { group: 'Europe' | 'North America' | 'APAC' | 'MENA / South Asia' | 'LATAM'; region: Region; items: Array<{ code: Locale; label: string; icon: string }> }
+type Combo = { group: 'Europe' | 'North America' | 'APAC' | 'MENA / South Asia' | 'LATAM'; region: Region; items: Array<{ region?: Region; code: Locale; label: string; icon: string }> }
 
 const COMBOS: Combo[] = [
   { group: 'Europe', region: 'eu', items: [
@@ -17,10 +17,12 @@ const COMBOS: Combo[] = [
     { code: 'pt', label: 'PT', icon: '🇵🇹' }
   ]},
   { group: 'North America', region: 'us', items: [
-    { code: 'en', label: 'EN', icon: '🇺🇸' },
-    { code: 'fr', label: 'FR', icon: '🇨🇦' },
-    { code: 'es', label: 'ES', icon: '🇲🇽' },
-    { code: 'pt', label: 'PT', icon: '🇧🇷' }
+    { region: 'us', code: 'en', label: 'EN', icon: '🇺🇸' },
+    { region: 'us', code: 'es', label: 'ES', icon: '🇺🇸' },
+    { region: 'ca', code: 'fr', label: 'FR', icon: '🇨🇦' },
+    { region: 'ca', code: 'en', label: 'EN', icon: '🇨🇦' },
+    { region: 'mx', code: 'es', label: 'ES', icon: '🇲🇽' },
+    // { code: 'pt', label: 'PT', icon: '🇧🇷' }
   ]},
   { group: 'APAC', region: 'apac', items: [
     { code: 'en', label: 'EN', icon: '🇸🇬' },
@@ -74,8 +76,58 @@ export function LanguageRegionMenu({ locale, region }: { locale: Locale; region:
         onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center rounded-md border border-foreground/20 px-3 py-1.5 text-sm hover:bg-foreground/5"
       >
-        <span className="mr-2">{region === 'us' ? '🇺🇸' : region === 'eu' ? '🇪🇺' : region === 'apac' ? '🌏' : region === 'latam' ? '🌎' : '🌍'}</span>
-        <span className="mr-1">{region === 'us' ? 'US' : region === 'eu' ? 'EU' : region === 'apac' ? 'APAC' : region === 'latam' ? 'LATAM' : 'MENA'}</span>
+        <span className="mr-2">
+          {
+            (() => {
+              // Covers all combos in COMBOS above, with best-guess for region+locale
+              const flagMap: Record<string, string> = {
+                // US/UK/Canada
+                'us-en': '🇺🇸',
+                'us-es': '🇺🇸', // US Spanish
+                'ca-fr': '🇨🇦', // French in US region = Canada
+                'ca-en': '🇨🇦', // English in Canada region = Canada
+                'mx-es': '🇲🇽', // Mexico Spanish
+                // Western Europe
+                'eu-en': '🇬🇧', // UK
+                'eu-fr': '🇫🇷',
+                'eu-de': '🇩🇪',
+                'eu-it': '🇮🇹',
+                'eu-es': '🇪🇸',
+                'eu-pt': '🇵🇹',
+                'eu-nl': '🇳🇱',
+                // APAC
+                'apac-en': '🇸🇬',
+                'apac-cn': '🇨🇳',
+                'apac-ja': '🇯🇵',
+                'apac-ko': '🇰🇷',
+                'apac-id': '🇮🇩',
+                // MENA / South Asia
+                'mena-ar': '🇸🇦',
+                'mena-ur': '🇵🇰',
+                'mena-hi': '🇮🇳',
+                'mena-bn': '🇧🇩',
+                'mena-tr': '🇹🇷',
+                'mena-ru': '🇷🇺',
+                // LATAM
+                'latam-es': '🇦🇷', // Could be 🇲🇽, 🇦🇷, etc. (Argentina for now)
+                'latam-pt': '🇧🇷',
+              }
+              const key = `${region}-${locale}`
+              return flagMap[key] || ''
+            })()
+          }
+        </span>
+        <span className="mr-1">
+          {{
+            us: 'US',
+            ca: 'CA',
+            mx: 'MX',
+            eu: 'EU',
+            apac: 'APAC',
+            mena: 'MENA',
+            latam: 'LATAM'
+          }[region] || region.toUpperCase()}
+        </span>
         <span className="opacity-60">/</span>
         <span className="ml-1">{locale.toUpperCase()}</span>
       </button>
@@ -88,8 +140,8 @@ export function LanguageRegionMenu({ locale, region }: { locale: Locale; region:
                 {group.items.map((item) => (
                   <button
                     key={item.code}
-                    onClick={async () => { await setRegion(group.region); await setLang(item.code) }}
-                    className={`flex items-center gap-2 px-2 py-1.5 text-sm rounded border border-transparent ${region===group.region && locale===item.code ? 'bg-foreground/10 border-foreground/20' : 'hover:bg-foreground/5'}`}
+                    onClick={async () => { await setRegion(item.region || group.region); await setLang(item.code) }}
+                    className={`flex items-center gap-2 px-2 py-1.5 text-sm rounded border border-transparent ${region===(item.region || group.region) && locale===item.code ? 'bg-foreground/10 border-foreground/20' : 'hover:bg-foreground/5'}`}
                   >
                     <span>{item.icon}</span>
                     <span>{item.label}</span>

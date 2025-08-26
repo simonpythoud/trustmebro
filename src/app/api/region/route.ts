@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
   const { region } = await req.json().catch(() => ({}))
-  if (!region || !['eu','us','apac','latam','mena'].includes(region)) {
+  if (!region || !['eu','us','ca','mx','apac','latam','mena'].includes(region)) {
     return NextResponse.json({ error: 'region required' }, { status: 400 })
   }
   const res = NextResponse.json({ ok: true })

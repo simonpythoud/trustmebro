@@ -39,7 +39,7 @@ export default async function RootLayout({
   const locale = normalizeLocale(cookieStore.get('lang')?.value || 'en')
   const t = getT(locale)
   const cookieRegion = cookieStore.get('region')?.value
-  const region = (cookieRegion === 'us' || cookieRegion === 'apac' || cookieRegion === 'latam' || cookieRegion === 'mena') ? (cookieRegion as 'us'|'apac'|'latam'|'mena') : 'eu'
+  const region = (cookieRegion === 'us' || cookieRegion === 'ca' || cookieRegion === 'mx' || cookieRegion === 'apac' || cookieRegion === 'latam' || cookieRegion === 'mena') ? (cookieRegion as 'us'|'ca'|'mx'|'apac'|'latam'|'mena') : 'eu'
   return (
     <html lang={locale}>
       <body
@@ -67,7 +67,7 @@ export default async function RootLayout({
                     <Link href="/signup" className="inline-flex items-center rounded-md bg-foreground px-3 py-1.5 text-background hover:opacity-90">{t('nav.signup')}</Link>
                   </>
                 )}
-                <span className="mx-2 text-foreground/30 hidden sm:inline">|</span>
+                <span className="mx-0 md:mx-2 text-foreground/30 hidden sm:inline">|</span>
                 <LanguageRegionMenu locale={locale} region={region as any} />
               </nav>
             </div>
