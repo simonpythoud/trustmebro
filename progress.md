@@ -345,6 +345,11 @@ Gaps/TODO (coding — Cursor):
 - Cancel endpoints immediately set `Cancelled` (no mutual flow)
 - No payouts/fees on `Released`; funds will accumulate in platform without transfer logic
 
+Fixes (recent):
+
+- [DONE] Dashboard used public state for logged-in users due to wrong auth import in `src/lib/user.ts` (`@/lib/auth` vs `@/auth`). Fixed and added proper unauthorized vs empty-state UI.
+- [DONE] Mobile navbar overflow: tightened spacing, hid non-essential links on small screens, enabled horizontal scroll-safe container to avoid wrapping; updated `src/app/layout.tsx` and minor CSS.
+
 ---
 
 ### 16) What is already implemented (by area)

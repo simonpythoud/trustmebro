@@ -32,18 +32,18 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header className="sticky top-0 z-50 border-b border-foreground/10 bg-background/80 backdrop-blur">
-          <div className="mx-auto max-w-6xl px-6 h-14 flex items-center gap-6">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 h-14 flex items-center gap-3 sm:gap-6 overflow-x-auto overflow-y-hidden">
             <Link href="/" className="flex items-center gap-2">
               <img src="/globe.svg" alt="TrustMeBro" className="h-5 w-5" />
               <span className="text-sm font-semibold">TrustMeBro</span>
             </Link>
-            <nav className="ml-auto flex items-center gap-4 text-sm">
-              <Link href="/" className="hover:underline">Home</Link>
+            <nav className="ml-auto flex items-center gap-3 sm:gap-4 text-sm whitespace-nowrap">
+              <Link href="/" className="hover:underline hidden sm:inline">Home</Link>
               <Link href="/contracts/new" className="hover:underline">Create contract</Link>
-              <Link href="/dashboard" className="hover:underline">Dashboard</Link>
+              <Link href="/dashboard" className="hover:underline hidden xs:inline">Dashboard</Link>
               {session?.user?.email ? (
                 <>
-                  <Link href="/profile" className="hover:underline">Profile</Link>
+                  <Link href="/profile" className="hover:underline hidden sm:inline">Profile</Link>
                   <SignOutButton />
                 </>
               ) : (
@@ -52,12 +52,14 @@ export default async function RootLayout({
                   <Link href="/signup" className="inline-flex items-center rounded-md bg-foreground px-3 py-1.5 text-background hover:opacity-90">Sign up</Link>
                 </>
               )}
-              <span className="mx-2 text-foreground/30">|</span>
-              <Link href="/?lang=en" className="hover:underline">EN</Link>
-              <Link href="/?lang=fr" className="hover:underline">FR</Link>
-              <span className="mx-2 text-foreground/30">/</span>
-              <Link href="/?region=eu" className="hover:underline">EU</Link>
-              <Link href="/?region=us" className="hover:underline">US</Link>
+              <span className="mx-2 text-foreground/30 hidden sm:inline">|</span>
+              <div className="hidden sm:flex items-center gap-2">
+                <Link href="/?lang=en" className="hover:underline">EN</Link>
+                <Link href="/?lang=fr" className="hover:underline">FR</Link>
+                <span className="mx-2 text-foreground/30">/</span>
+                <Link href="/?region=eu" className="hover:underline">EU</Link>
+                <Link href="/?region=us" className="hover:underline">US</Link>
+              </div>
             </nav>
           </div>
         </header>

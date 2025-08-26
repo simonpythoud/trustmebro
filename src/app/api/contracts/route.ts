@@ -5,7 +5,7 @@ import { CreateContractSchema } from '@/lib/schemas'
 export const runtime = 'nodejs'
 
 export async function GET(req: Request) {
-	let email: string | null = await getRequestUserEmail()
+	const email: string | null = await getRequestUserEmail()
 	if (!email) return new Response('Unauthorized', { status: 401 })
 	const url = new URL(req.url)
 	const role = url.searchParams.get('role')
@@ -18,7 +18,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-	let email: string | null = await getRequestUserEmail()
+	const email: string | null = await getRequestUserEmail()
 	if (!email) return new Response('Unauthorized', { status: 401 })
 	const user = await prisma.user.findUnique({ where: { email } })
 	if (!user || user.role !== 'brand') return new Response('Forbidden', { status: 403 })

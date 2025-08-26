@@ -6,12 +6,13 @@ import ConversionTabs from '../components/ConversionTabs'
 
 export default function DashboardPage() {
   const [items, setItems] = useState<any[] | null>(null)
+  const [unauthorized, setUnauthorized] = useState(false)
   useEffect(() => {
     let mounted = true
-    fetch('/api/contracts?role=brand', { cache: 'no-store' })
+    fetch('/api/contracts?role=brand', { cache: 'no-store', credentials: 'include' })
       .then(async (r) => {
         if (!mounted) return
-        if (r.status === 401) { setItems([]); return }
+        if (r.status === 401) { setUnauthorized(true); setItems([]); return }
         if (!r.ok) { setItems([]); return }
         setItems(await r.json())
       })
@@ -29,9 +30,15 @@ export default function DashboardPage() {
         <div className="mt-8 text-sm text-foreground/60">Loading…</div>
       ) : items.length === 0 ? (
         <>
-          <div className="mt-4 rounded-md border border-amber-300/50 bg-amber-50 text-amber-900 px-4 py-2 text-sm">
-            You’re not logged in. Please <Link href="/signin" className="underline">sign in</Link> to view your real dashboard.
-          </div>
+          {unauthorized ? (
+            <div className="mt-4 rounded-md border border-amber-300/50 bg-amber-50 text-amber-900 px-4 py-2 text-sm">
+              You’re not logged in. Please <Link href="/signin" className="underline">sign in</Link> to view your real dashboard.
+            </div>
+          ) : (
+            <div className="mt-4 rounded-md border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm">
+              No contracts yet. <Link href="/contracts/new" className="underline">Create your first contract</Link> to get started.
+            </div>
+          )}
 
           <section className="mt-8 grid gap-6">
             <div className="rounded-lg border border-foreground/10 p-6 bg-background/60">
