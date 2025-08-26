@@ -1,3 +1,47 @@
-{}
-
-
+{
+    "meta": {
+        "title": "TrustMeBro — 브랜드와 크리에이터를 위한 안전한 협업",
+        "description": "인플루언서 협업을 위한 에스크로 + 디지털 계약. 이중 예치금, 검증된 산출물, 자동 지급."
+    },
+    "nav": {
+        "brand": "TrustMeBro",
+        "home": "홈",
+        "create": "계약 생성",
+        "dashboard": "대시보드",
+        "profile": "프로필",
+        "signin": "로그인",
+        "signup": "가입"
+    },
+    "auth": {
+        "signin": {
+            "title": "로그인",
+            "email": "이메일",
+            "password": "비밀번호",
+            "submit": "로그인"
+        },
+        "signup": {
+            "title": "계정 만들기",
+            "name": "이름",
+            "email": "이메일",
+            "password": "비밀번호",
+            "role": "역할",
+            "creator": "크리에이터",
+            "brand": "브랜드",
+            "submit": "만들기",
+            "error": "가입 실패"
+        },
+        "signout": "로그아웃"
+    },
+    "state": {
+        "Draft": "초안",
+        "Proposed": "제안됨",
+        "Accepted": "승인됨",
+        "Funded": "자금 조달",
+        "InProgress": "진행 중",
+        "UnderReview": "검토 중",
+        "RevisionsRequested": "수정 요청",
+        "Released": "해제됨",
+        "Cancelled": "취소됨",
+        "Expired": "만료됨"
+    }
+}

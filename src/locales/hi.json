@@ -1,3 +1,67 @@
-{}
-
-
+{
+    "meta": {
+        "title": "TrustMeBro — ब्रांड और क्रिएटर्स के लिए सुरक्षित सहयोग",
+        "description": "इन्फ्लुएंसर सहयोग हेतु एस्क्रो + डिजिटल कॉन्ट्रैक्ट (EU & US). दोहरी जमा, सत्यापित डिलीवरबल्स, ऑटो भुगतान."
+    },
+    "nav": {
+        "brand": "TrustMeBro",
+        "home": "होम",
+        "create": "कॉन्ट्रैक्ट बनाएं",
+        "dashboard": "डैशबोर्ड",
+        "profile": "प्रोफ़ाइल",
+        "signin": "साइन इन",
+        "signup": "खाता बनाएं",
+        "lang": "भाषा",
+        "region": "क्षेत्र",
+        "EN": "EN",
+        "FR": "FR",
+        "ES": "ES",
+        "DE": "DE",
+        "IT": "IT",
+        "CN": "CN",
+        "EU": "EU",
+        "US": "US"
+    },
+    "home": {
+        "tagline": "ब्रांड और क्रिएटर्स के लिए",
+        "heroTitle": "वास्तव में परिणाम देने वाला सुरक्षित सहयोग",
+        "heroDesc": "TrustMeBro एस्क्रो + कॉन्ट्रैक्ट लेयर है.",
+        "ctaPrimary": "शुरू करें — मुफ्त",
+        "ctaSecondary": "कॉन्ट्रैक्ट बनाएं",
+        "pillEscrow": "एस्क्रो समर्थित",
+        "pillAutoApprove": "48 घंटे में ऑटो‑अप्रूव",
+        "pillAdmin": "एडमिन समाधान"
+    },
+    "auth": {
+        "signin": {
+            "title": "साइन इन",
+            "email": "ईमेल",
+            "password": "पासवर्ड",
+            "submit": "साइन इन"
+        },
+        "signup": {
+            "title": "खाता बनाएं",
+            "name": "नाम",
+            "email": "ईमेल",
+            "password": "पासवर्ड",
+            "role": "भूमिका",
+            "creator": "क्रिएटर",
+            "brand": "ब्रांड",
+            "submit": "बनाएं",
+            "error": "साइन‑अप विफल"
+        },
+        "signout": "साइन आउट"
+    },
+    "state": {
+        "Draft": "ड्राफ्ट",
+        "Proposed": "प्रस्तावित",
+        "Accepted": "स्वीकृत",
+        "Funded": "फंडेड",
+        "InProgress": "प्रगति में",
+        "UnderReview": "समीक्षा में",
+        "RevisionsRequested": "संशोधन मांगे",
+        "Released": "रिलीज़",
+        "Cancelled": "रद्द",
+        "Expired": "समाप्त"
+    }
+}

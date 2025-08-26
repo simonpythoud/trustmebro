@@ -1,3 +1,47 @@
-{}
-
-
+{
+    "meta": {
+        "title": "TrustMeBro — برانڈز اور کریئیٹرز کے لیے محفوظ تعاون",
+        "description": "انفلوئنسر تعاون کے لیے ایسكرو + ڈیجیٹل معاہدہ۔ ڈبل ڈپازٹ، تصدیق شدہ ڈیلیوری، خودکار ادائیگیاں۔"
+    },
+    "nav": {
+        "brand": "TrustMeBro",
+        "home": "ہوم",
+        "create": "معاہدہ بنائیں",
+        "dashboard": "ڈیش بورڈ",
+        "profile": "پروفائل",
+        "signin": "سائن اِن",
+        "signup": "اکاؤنٹ بنائیں"
+    },
+    "auth": {
+        "signin": {
+            "title": "سائن اِن",
+            "email": "ای میل",
+            "password": "پاس ورڈ",
+            "submit": "سائن اِن"
+        },
+        "signup": {
+            "title": "اکاؤنٹ بنائیں",
+            "name": "نام",
+            "email": "ای میل",
+            "password": "پاس ورڈ",
+            "role": "کردار",
+            "creator": "کریئیٹر",
+            "brand": "برانڈ",
+            "submit": "بنائیں",
+            "error": "سائن اپ ناکام"
+        },
+        "signout": "سائن آؤٹ"
+    },
+    "state": {
+        "Draft": "ڈرافٹ",
+        "Proposed": "تجویز شدہ",
+        "Accepted": "منظور شدہ",
+        "Funded": "فنڈڈ",
+        "InProgress": "جاری",
+        "UnderReview": "جائزہ میں",
+        "RevisionsRequested": "ترمیم درکار",
+        "Released": "جاری کیا",
+        "Cancelled": "منسوخ",
+        "Expired": "میعاد ختم"
+    }
+}

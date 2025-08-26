@@ -82,8 +82,23 @@
     "finalSecondary": "Redigir contrato"
   },
   "auth": {
-    "signin": { "title": "Entrar", "email": "Email", "password": "Senha", "submit": "Entrar" },
-    "signup": { "title": "Crie sua conta", "name": "Nome", "email": "Email", "password": "Senha", "role": "Função", "creator": "Criador", "brand": "Marca", "submit": "Criar conta", "error": "Falha ao cadastrar" },
+    "signin": {
+      "title": "Entrar",
+      "email": "Email",
+      "password": "Senha",
+      "submit": "Entrar"
+    },
+    "signup": {
+      "title": "Crie sua conta",
+      "name": "Nome",
+      "email": "Email",
+      "password": "Senha",
+      "role": "Função",
+      "creator": "Criador",
+      "brand": "Marca",
+      "submit": "Criar conta",
+      "error": "Falha ao cadastrar"
+    },
     "signout": "Sair"
   },
   "dashboard": {
@@ -237,7 +252,3 @@
     "Expired": "Expirado"
   }
 }
-
-{}
-
-
