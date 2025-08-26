@@ -25,6 +25,12 @@ export async function POST(req: Request) {
       const funds = await prisma.funding.findMany({ where: { contractId: updated.contractId, status: 'succeeded' }})
       const c = await prisma.contract.findUnique({ where: { id: updated.contractId }})
       if (c) {
+        // Do not downgrade or change state if already terminal
+        const terminalStates = ['Released','Closed','Expired','Cancelled','AdminResolved'] as const
+        if (terminalStates.includes(c.state as any)) {
+          await prisma.auditLog.create({ data: { action: 'WEBHOOK.ignored_terminal', resource: 'Contract', resourceId: c.id, metadata: { type, pi: id, state: c.state } } })
+          return Response.json({ received: true })
+        }
         const hasBudget = funds.some(f=>f.type==='brand_budget')
         const hasBrandDep = c.brandDepositCents===0 || funds.some(f=>f.type==='brand_deposit')
         const hasCreatorDep = c.creatorDepositCents===0 || funds.some(f=>f.type==='creator_deposit')
@@ -48,6 +54,24 @@ export async function POST(req: Request) {
       }
       await prisma.auditLog.create({ data: { action: 'WEBHOOK.pi.succeeded', resource: 'Funding', resourceId: id, metadata: serializeStripeEvent(event) } })
     } catch {}
+  }
+
+  // Track transfers for payouts if configured
+  if (type === 'transfer.created' || type === 'transfer.paid' || type === 'transfer.failed') {
+    const transfer = event.data.object as any
+    const transferId = transfer?.id as string
+    if (transferId) {
+      try {
+        const payout = await prisma.payout.findFirst({ where: { pspTransferId: transferId }})
+        if (payout) {
+          let status = payout.status
+          if (type === 'transfer.paid') status = 'paid'
+          if (type === 'transfer.failed') status = 'failed'
+          await prisma.payout.update({ where: { id: payout.id }, data: { status }})
+        }
+        await prisma.auditLog.create({ data: { action: `WEBHOOK.${type}`, resource: 'Payout', resourceId: transferId, metadata: serializeStripeEvent(event) } })
+      } catch {}
+    }
   }
   return Response.json({ received: true })
 }

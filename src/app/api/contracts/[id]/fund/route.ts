@@ -19,10 +19,11 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const amountCents = type === 'brand_budget' ? contract.budgetCents : type === 'brand_deposit' ? contract.brandDepositCents : contract.creatorDepositCents
   if (amountCents <= 0) return new Response('No amount for this funding type', { status: 400 })
 
+  const captureMethod = type === 'brand_budget' ? 'manual' : 'automatic'
   const pi = await stripe.paymentIntents.create({
     amount: amountCents,
     currency: (contract.currency || 'CHF').toLowerCase(),
-    capture_method: 'automatic',
+    capture_method: captureMethod as any,
     description: `Contract ${contract.id} ${type}`,
     metadata: { contractId: contract.id, type },
     automatic_payment_methods: { enabled: true },
