@@ -13,9 +13,9 @@ Legend: [DONE] implemented and typechecked; [PARTIAL] implemented but gaps remai
 - [DONE] Auto-approve job endpoint
 - [DONE] Cursor rules under `.cursor/rules/docs-and-progress.mdc` to enforce spec/progress doc updates
 - [DONE] Cursor rule `.cursor/rules/commit-messages.mdc` to always suggest a git commit message after changes
-- [PARTIAL] Funding flow (client-side payment collection via Elements not wired; Funding state relies on webhook)
-- [PARTIAL] State machine (`InProgress` auto on full funding; auto-approve reads `UnderReview`; expire job added; guards enforce valid transitions; mutual cancel not enforced; payouts not executed)
-- [TODO] Payouts/fees, uploads (S3), rate-limiting, emails, observability, tests, i18n, signatures, advanced RBAC, production hardening
+- [PARTIAL] Funding flow (client-side payment collection via Elements not wired; Funding state relies on webhook). Budget PI now uses manual capture; capture occurs on approve/admin release.
+- [PARTIAL] State machine (`InProgress` auto on full funding; auto-approve reads `UnderReview`; expire job added; guards enforce valid transitions; mutual cancel not enforced). Payouts/fees executed on Released; webhook guarded from downgrading terminal states.
+- [TODO] Uploads (S3), rate-limiting, emails, observability, tests, i18n, signatures, advanced RBAC, production hardening
 
 ---
 
@@ -88,8 +88,8 @@ Files: `src/lib/stripe.ts`, `src/app/api/stripe/connect/onboard/route.ts`, `src/
 - [DONE] Create PaymentIntent per funding type; returns `client_secret` to client; logs `FUNDING_INIT.*`
 - [DONE] Webhook signature validation; `payment_intent.succeeded` → `Funding.status = succeeded` + `AuditLog`
 - [PARTIAL] No client payment collection UI using Elements; PaymentIntents are created but not confirmed with payment method
-- [TODO] Payouts: `Released` should trigger a Transfer to creator’s connected account, create `Payout` row, and create `Fee`
-- [TODO] Capture strategy: For budget, spec prefers capture at approval; we currently create `automatic` capture. Consider `manual` capture + capture on approve.
+- [DONE] Capture strategy: Budget uses `capture_method=manual`; capture executed on approve/admin release; deposits remain automatic. Webhook is idempotent and guarded for terminal states.
+- [DONE] On `Released`, compute platform fee, create `Fee` and `Payout`; attempt Stripe Transfer when using Connect Express; webhook updates payout status on `transfer.paid/failed`.
 - [NOTE/RISK] Stripe Connect Standard accounts do not support platform-initiated Transfers the same way as Express/Custom. For escrow-like flows and platform-controlled payouts, Express is recommended. If staying on Standard, redesign payout flow (brand pays creator directly or via hosted payment pages).
 
 Gaps/TODO (coding — Cursor):
@@ -272,8 +272,8 @@ Gaps/TODO (coding — Cursor):
 
 #### A) Critical payments & state
 
-1. [Cursor] Switch budget PaymentIntent to `capture_method=manual`; on approve, call `paymentIntents.capture`
-2. [Cursor] Implement payouts on `Released`: compute fee, create `Fee`, create `Transfer` (if Express) or alternative for Standard; update `Payout`
+1. [DONE] Switch budget PaymentIntent to `capture_method=manual`; on approve, call `paymentIntents.capture`
+2. [DONE] Implement payouts on `Released`: compute fee, create `Fee`, create `Transfer` (if Express) or alternative for Standard; update `Payout`
 3. [Cursor] Refund flows for cancel/expiration; partial deposit refunds/forfeits per policy
 4. [Cursor] Fix auto-approve job to read `UnderReview` and last `SUBMITTED` event; cron wiring
 5. [Cursor] Add `InProgress` state when all fundings `succeeded`
