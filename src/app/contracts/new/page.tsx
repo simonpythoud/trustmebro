@@ -1,7 +1,9 @@
 "use client"
 import { useState } from 'react'
+import { useI18n } from '@/lib/i18n-react'
 
 export default function NewContractPage() {
+  const { t } = useI18n()
   const [title, setTitle] = useState('')
   const [brief, setBrief] = useState('')
   const [platform, setPlatform] = useState<'tiktok'|'instagram'|'youtube'|'other'>('tiktok')
@@ -23,7 +25,7 @@ export default function NewContractPage() {
 
   return (
     <div className="max-w-xl mx-auto p-6">
-      <h1 className="text-2xl font-semibold mb-4">Create contract</h1>
+      <h1 className="text-2xl font-semibold mb-4">{t('contracts.new.title')}</h1>
       <form className="space-y-4" onSubmit={async (e)=>{
         e.preventDefault()
         setMsg(null)
@@ -43,50 +45,50 @@ export default function NewContractPage() {
             deadlineAt: new Date(deadline).toISOString(),
           })
         })
-        if (res.ok) setMsg('Created')
-        else setMsg('Error creating contract')
+        if (res.ok) setMsg(t('contracts.new.created'))
+        else setMsg(t('contracts.new.error'))
       }}>
         <div>
-          <label className="block text-sm mb-1">Creator ID</label>
+          <label className="block text-sm mb-1">{t('contracts.new.creatorId')}</label>
           <input data-testid="creator-id" className="border rounded w-full px-3 py-2" value={creatorId} onChange={(e)=>setCreatorId(e.target.value)} />
         </div>
         <div>
-          <label className="block text-sm mb-1">Title</label>
+          <label className="block text-sm mb-1">{t('contracts.new.titleLabel')}</label>
           <input data-testid="contract-title" className="border rounded w-full px-3 py-2" value={title} onChange={(e)=>setTitle(e.target.value)} />
         </div>
         <div>
-          <label className="block text-sm mb-1">Brief</label>
+          <label className="block text-sm mb-1">{t('contracts.new.brief')}</label>
           <textarea data-testid="contract-brief" className="border rounded w-full px-3 py-2" value={brief} onChange={(e)=>setBrief(e.target.value)} />
         </div>
         <div>
-          <label className="block text-sm mb-1">Platform</label>
+          <label className="block text-sm mb-1">{t('contracts.new.platform')}</label>
           <select data-testid="contract-platform" className="border rounded w-full px-3 py-2" value={platform} onChange={(e)=>setPlatform(e.target.value as any)}>
-            <option value="tiktok">TikTok</option>
-            <option value="instagram">Instagram</option>
-            <option value="youtube">YouTube</option>
-            <option value="other">Other</option>
+            <option value="tiktok">{t('contracts.new.platformTikTok')}</option>
+            <option value="instagram">{t('contracts.new.platformInstagram')}</option>
+            <option value="youtube">{t('contracts.new.platformYouTube')}</option>
+            <option value="other">{t('contracts.new.platformOther')}</option>
           </select>
         </div>
         <div>
-          <label className="block text-sm mb-1">Hashtags (comma separated)</label>
+          <label className="block text-sm mb-1">{t('contracts.new.hashtags')}</label>
           <input data-testid="contract-hashtags" className="border rounded w-full px-3 py-2" value={hashtags} onChange={(e)=>setHashtags(e.target.value)} />
         </div>
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm mb-1">Budget ({currency})</label>
+            <label className="block text-sm mb-1">{t('contracts.new.budget', { currency })}</label>
             <input data-testid="contract-budget" className="border rounded w-full px-3 py-2" value={budget} onChange={(e)=>setBudget(e.target.value)} />
           </div>
           <div>
-            <label className="block text-sm mb-1">Creator deposit ({currency})</label>
+            <label className="block text-sm mb-1">{t('contracts.new.creatorDeposit', { currency })}</label>
             <input data-testid="contract-creator-deposit" className="border rounded w-full px-3 py-2" value={depCreator} onChange={(e)=>setDepCreator(e.target.value)} />
           </div>
           <div>
-            <label className="block text-sm mb-1">Brand deposit ({currency})</label>
+            <label className="block text-sm mb-1">{t('contracts.new.brandDeposit', { currency })}</label>
             <input data-testid="contract-brand-deposit" className="border rounded w-full px-3 py-2" value={depBrand} onChange={(e)=>setDepBrand(e.target.value)} />
           </div>
         </div>
         <div>
-          <label className="block text-sm mb-1">Currency</label>
+          <label className="block text-sm mb-1">{t('contracts.new.currency')}</label>
           <select className="border rounded w-full px-3 py-2" value={currency} onChange={(e)=>setCurrency(e.target.value as any)}>
             <option value="CHF">CHF</option>
             <option value="EUR">EUR</option>
@@ -94,10 +96,10 @@ export default function NewContractPage() {
           </select>
         </div>
         <div>
-          <label className="block text-sm mb-1">Deadline</label>
+          <label className="block text-sm mb-1">{t('contracts.new.deadline')}</label>
           <input data-testid="contract-deadline" type="datetime-local" className="border rounded w-full px-3 py-2" value={deadline} onChange={(e)=>setDeadline(e.target.value)} />
         </div>
-        <button data-testid="contract-submit" className="bg-black text-white px-4 py-2 rounded" type="submit">Create</button>
+        <button data-testid="contract-submit" className="bg-black text-white px-4 py-2 rounded" type="submit">{t('contracts.new.submit')}</button>
       </form>
       {msg && <p className="mt-3 text-sm">{msg}</p>}
     </div>

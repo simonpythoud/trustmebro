@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Locale } from '@/lib/i18n'
 
-type Region = 'eu' | 'us'
+type Region = 'eu' | 'us' | 'cn'
 
 type Combo = { group: 'Europe' | 'North America' | 'Asia'; region: Region; items: Array<{ code: Locale; label: string; icon: string }> }
 
@@ -15,12 +15,12 @@ const COMBOS: Combo[] = [
     { code: 'it', label: 'IT', icon: '🇮🇹' },
     { code: 'es', label: 'ES', icon: '🇪🇸' },
   ]},
-  { group: 'North America', region: 'us', items: [
+  { group: 'North America', region: 'us', items: [ // group north america under us for now
     { code: 'en', label: 'EN', icon: '🇺🇸' },
     { code: 'fr', label: 'FR', icon: '🇨🇦' },
     { code: 'es', label: 'ES', icon: '🇲🇽' },
   ]},
-  { group: 'Asia', region: 'eu', items: [ // keep EU rules for now except CN
+  { group: 'Asia', region: 'cn', items: [ // group asia under cn for now
     { code: 'en', label: 'EN', icon: '🇸🇬' },
     { code: 'cn', label: 'CN', icon: '🇨🇳' },
   ]},
@@ -57,8 +57,19 @@ export function LanguageRegionMenu({ locale, region }: { locale: Locale; region:
         onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center rounded-md border border-foreground/20 px-3 py-1.5 text-sm hover:bg-foreground/5"
       >
-        <span className="mr-2">{region === 'us' ? '🇺🇸' : '🇪🇺'}</span>
-        <span className="mr-1">{region === 'us' ? 'US' : 'EU'}</span>
+        <span className="mr-2">
+          {region === 'us' && locale === 'en' && '🇺🇸'}
+          {region === 'us' && locale === 'fr' && '🇨🇦'}
+          {region === 'us' && locale === 'es' && '🇲🇽'}
+          {region === 'eu' && locale === 'en' && '🇬🇧'}
+          {region === 'eu' && locale === 'fr' && '🇫🇷'}
+          {region === 'eu' && locale === 'de' && '🇩🇪'}
+          {region === 'eu' && locale === 'it' && '🇮🇹'}
+          {region === 'eu' && locale === 'es' && '🇪🇸'}
+          {region === 'cn' && locale === 'en' && '🇸🇬'}
+          {region === 'cn' && locale === 'cn' && '🇨🇳'}
+        </span>
+        <span className="mr-1">{region === 'us' ? 'US' : region === 'cn' ? 'CN' : 'EU'}</span>
         <span className="opacity-60">/</span>
         <span className="ml-1">{locale.toUpperCase()}</span>
       </button>

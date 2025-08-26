@@ -1,42 +1,48 @@
-export default function SecurityPage() {
+import { cookies } from 'next/headers'
+import { getT, normalizeLocale } from '@/lib/i18n'
+
+export default async function SecurityPage() {
+	const cookieStore = await cookies()
+	const locale = normalizeLocale(cookieStore.get('lang')?.value || 'en')
+	const t = getT(locale)
 	return (
 		<main className="mx-auto max-w-3xl px-6 py-12 space-y-6">
-			<h1 className="text-3xl font-semibold">Security</h1>
-			<p className="text-foreground/70">We take data protection and platform security seriously. Below is a summary adapted from the TrustMeBro spec.</p>
+			<h1 className="text-3xl font-semibold">{t('static.security.title')}</h1>
+			<p className="text-foreground/70">{t('static.security.intro')}</p>
 			<section className="space-y-3 text-sm">
-				<h2 className="text-xl font-semibold">Headers & HTTPS</h2>
+				<h2 className="text-xl font-semibold">{t('static.security.headers')}</h2>
 				<ul className="list-disc pl-5 space-y-1">
-					<li>Strict security headers: CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy.</li>
-					<li>HTTPS-only; HSTS preload enabled.</li>
+					<li>{t('static.security.headers1')}</li>
+					<li>{t('static.security.headers2')}</li>
 				</ul>
 			</section>
 			<section className="space-y-3 text-sm">
-				<h2 className="text-xl font-semibold">Auth, RBAC, audit</h2>
+				<h2 className="text-xl font-semibold">{t('static.security.auth')}</h2>
 				<ul className="list-disc pl-5 space-y-1">
-					<li>NextAuth with role-based access (brand, creator, admin).</li>
-					<li>Middleware enforced on API and app sections; event timeline and audit logs for sensitive actions.</li>
+					<li>{t('static.security.auth1')}</li>
+					<li>{t('static.security.auth2')}</li>
 				</ul>
 			</section>
 			<section className="space-y-3 text-sm">
-				<h2 className="text-xl font-semibold">Payments</h2>
+				<h2 className="text-xl font-semibold">{t('static.security.payments')}</h2>
 				<ul className="list-disc pl-5 space-y-1">
-					<li>Stripe Connect (Standard) for onboarding and funds flow; signed webhook verification; idempotency at application layer.</li>
+					<li>{t('static.security.payments1')}</li>
 				</ul>
 			</section>
 			<section className="space-y-3 text-sm">
-				<h2 className="text-xl font-semibold">Data & storage</h2>
+				<h2 className="text-xl font-semibold">{t('static.security.data')}</h2>
 				<ul className="list-disc pl-5 space-y-1">
-					<li>PostgreSQL via Prisma; indices per access patterns; least-privilege credentials.</li>
-					<li>Files (screenshots) via private S3 with signed URLs (planned).</li>
+					<li>{t('static.security.data1')}</li>
+					<li>{t('static.security.data2')}</li>
 				</ul>
 			</section>
 			<section className="space-y-3 text-sm">
-				<h2 className="text-xl font-semibold">Observability</h2>
+				<h2 className="text-xl font-semibold">{t('static.security.observability')}</h2>
 				<ul className="list-disc pl-5 space-y-1">
-					<li>Sentry and OpenTelemetry planned; correlation with contract/user/event IDs.</li>
+					<li>{t('static.security.observability1')}</li>
 				</ul>
 			</section>
-			<p className="text-foreground/60 text-sm">For details, see the TrustMeBro documentation (Security, Observability sections).</p>
+			<p className="text-foreground/60 text-sm">{t('static.security.footer')}</p>
 		</main>
 	)
 }

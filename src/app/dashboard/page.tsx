@@ -3,8 +3,10 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { StateBadge } from '../components/StateBadge'
 import ConversionTabs from '../components/ConversionTabs'
+import { useI18n } from '@/lib/i18n-react'
 
 export default function DashboardPage() {
+  const { t } = useI18n()
   const [items, setItems] = useState<any[] | null>(null)
   const [unauthorized, setUnauthorized] = useState(false)
   useEffect(() => {
@@ -22,36 +24,36 @@ export default function DashboardPage() {
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
       <div className="flex items-center gap-3">
-        <h1 className="text-3xl font-semibold">Dashboard</h1>
-        <Link data-testid="create-contract" href="/contracts/new" className="ml-auto inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90">Create contract</Link>
+        <h1 className="text-3xl font-semibold">{t('dashboard.title')}</h1>
+        <Link data-testid="create-contract" href="/contracts/new" className="ml-auto inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90">{t('dashboard.create')}</Link>
       </div>
 
       {items === null ? (
-        <div className="mt-8 text-sm text-foreground/60">Loading…</div>
+        <div className="mt-8 text-sm text-foreground/60">{t('dashboard.loading')}</div>
       ) : items.length === 0 ? (
         <>
           {unauthorized ? (
             <div className="mt-4 rounded-md border border-amber-300/50 bg-amber-50 text-amber-900 px-4 py-2 text-sm">
-              You’re not logged in. Please <Link href="/signin" className="underline">sign in</Link> to view your real dashboard.
+              {t('dashboard.unauthorized', { signin: '' })} <Link href="/signin" className="underline">{t('dashboard.unauthorizedLink')}</Link>
             </div>
           ) : (
             <div className="mt-4 rounded-md border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm">
-              No contracts yet. <Link href="/contracts/new" className="underline">Create your first contract</Link> to get started.
+              {t('dashboard.empty', { create: '' })} <Link href="/contracts/new" className="underline">{t('dashboard.emptyLink')}</Link>
             </div>
           )}
 
           <section className="mt-8 grid gap-6">
             <div className="rounded-lg border border-foreground/10 p-6 bg-background/60">
-              <h2 className="text-xl font-semibold">What you can do with TrustMeBro</h2>
+              <h2 className="text-xl font-semibold">{t('dashboard.whatTitle')}</h2>
               <ul className="mt-4 grid gap-2 text-sm text-foreground/80">
-                <li>• Draft contracts with deliverables, budgets and deadlines</li>
-                <li>• Dual-deposit escrow to align incentives</li>
-                <li>• Auto-approve with audit trail and dispute resolution</li>
-                <li>• Payouts via Stripe with VAT/GDPR awareness</li>
+                <li>{t('dashboard.what1')}</li>
+                <li>{t('dashboard.what2')}</li>
+                <li>{t('dashboard.what3')}</li>
+                <li>{t('dashboard.what4')}</li>
               </ul>
               <div className="mt-4 flex flex-wrap gap-3">
-                <Link href="/signup" className="inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90">Create an account</Link>
-                <Link href="/contracts/new" className="inline-flex items-center rounded-md border border-foreground/20 px-4 py-2 text-sm hover:bg-foreground/5">Draft a contract</Link>
+                <Link href="/signup" className="inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90">{t('dashboard.ctaCreateAccount')}</Link>
+                <Link href="/contracts/new" className="inline-flex items-center rounded-md border border-foreground/20 px-4 py-2 text-sm hover:bg-foreground/5">{t('dashboard.ctaDraft')}</Link>
               </div>
             </div>
 
@@ -60,12 +62,12 @@ export default function DashboardPage() {
                 brand={(
                   <div className="grid gap-3 text-sm">
                     <div>
-                      <div className="font-medium">For Brands</div>
+                      <div className="font-medium">{t('dashboard.forBrands')}</div>
                       <ul className="mt-2 space-y-1 text-foreground/80">
-                        <li>• Commit budget safely with escrow</li>
-                        <li>• Transparent states and audit trail</li>
-                        <li>• Approve deliverables or auto‑approve</li>
-                        <li>• Handle cancellations and disputes fairly</li>
+                        <li>{t('dashboard.brand1')}</li>
+                        <li>{t('dashboard.brand2')}</li>
+                        <li>{t('dashboard.brand3')}</li>
+                        <li>{t('dashboard.brand4')}</li>
                       </ul>
                     </div>
                   </div>
@@ -73,12 +75,12 @@ export default function DashboardPage() {
                 creator={(
                   <div className="grid gap-3 text-sm">
                     <div>
-                      <div className="font-medium">For Creators</div>
+                      <div className="font-medium">{t('dashboard.forCreators')}</div>
                       <ul className="mt-2 space-y-1 text-foreground/80">
-                        <li>• No more ghosting: deposits up front</li>
-                        <li>• Clear brief and due date</li>
-                        <li>• Fast payouts after approval</li>
-                        <li>• Admin resolves edge cases</li>
+                        <li>{t('dashboard.creator1')}</li>
+                        <li>{t('dashboard.creator2')}</li>
+                        <li>{t('dashboard.creator3')}</li>
+                        <li>{t('dashboard.creator4')}</li>
                       </ul>
                     </div>
                   </div>

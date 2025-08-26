@@ -1,4 +1,4 @@
-export function StateBadge({ state }: { state: string }) {
+export function StateBadge({ state, label }: { state: string, label?: string }) {
 	const color =
 		state === 'Draft' ? 'bg-gray-100 text-gray-700 border-gray-200' :
 		state === 'Proposed' ? 'bg-sky-50 text-sky-700 border-sky-200' :
@@ -13,7 +13,7 @@ export function StateBadge({ state }: { state: string }) {
 		'bg-gray-100 text-gray-700 border-gray-200'
 	return (
 		<span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium ${color}`}>
-			{state}
+			{label ?? state}
 		</span>
 	)
 }

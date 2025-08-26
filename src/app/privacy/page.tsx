@@ -1,33 +1,39 @@
-export default function PrivacyPage() {
+import { cookies } from 'next/headers'
+import { getT, normalizeLocale } from '@/lib/i18n'
+
+export default async function PrivacyPage() {
+	const cookieStore = await cookies()
+	const locale = normalizeLocale(cookieStore.get('lang')?.value || 'en')
+	const t = getT(locale)
 	return (
 		<main className="mx-auto max-w-3xl px-6 py-12 space-y-6">
-			<h1 className="text-3xl font-semibold">Privacy Policy (MVP)</h1>
-			<p className="text-foreground/70">This outlines how TrustMeBro handles personal data as described in the product spec. A full legal policy will replace this MVP text.</p>
+			<h1 className="text-3xl font-semibold">{t('static.privacy.title')}</h1>
+			<p className="text-foreground/70">{t('static.privacy.intro')}</p>
 			<section className="space-y-3 text-sm">
-				<h2 className="text-xl font-semibold">Data we process</h2>
+				<h2 className="text-xl font-semibold">{t('static.privacy.data')}</h2>
 				<ul className="list-disc pl-5 space-y-1">
-					<li>Account data: email, name, role (brand/creator/admin).</li>
-					<li>Contract data: titles, briefs, deadlines, amounts, events.</li>
-					<li>Payment metadata from PSP (Stripe), not card numbers.</li>
-					<li>Submission metadata (URLs, platform, screenshots).</li>
+					<li>{t('static.privacy.data1')}</li>
+					<li>{t('static.privacy.data2')}</li>
+					<li>{t('static.privacy.data3')}</li>
+					<li>{t('static.privacy.data4')}</li>
 				</ul>
 			</section>
 			<section className="space-y-3 text-sm">
-				<h2 className="text-xl font-semibold">Purpose & legal basis</h2>
+				<h2 className="text-xl font-semibold">{t('static.privacy.purpose')}</h2>
 				<ul className="list-disc pl-5 space-y-1">
-					<li>Contract execution between brands and creators.</li>
-					<li>Compliance (KYC/AML via PSP, audit logs, dispute resolution).</li>
-					<li>Security and fraud prevention.</li>
+					<li>{t('static.privacy.purpose1')}</li>
+					<li>{t('static.privacy.purpose2')}</li>
+					<li>{t('static.privacy.purpose3')}</li>
 				</ul>
 			</section>
 			<section className="space-y-3 text-sm">
-				<h2 className="text-xl font-semibold">Retention & rights</h2>
+				<h2 className="text-xl font-semibold">{t('static.privacy.retention')}</h2>
 				<ul className="list-disc pl-5 space-y-1">
-					<li>Retention aligned with legal requirements and dispute windows.</li>
-					<li>Right of access, rectification, and erasure per GDPR/LPD; contact us to exercise rights.</li>
+					<li>{t('static.privacy.retention1')}</li>
+					<li>{t('static.privacy.retention2')}</li>
 				</ul>
 			</section>
-			<p className="text-foreground/60 text-sm">For production, a lawyer-reviewed policy will be published. This MVP mirrors the privacy aspects in TrustMeBro.md.</p>
+			<p className="text-foreground/60 text-sm">{t('static.privacy.footer')}</p>
 		</main>
 	)
 }
