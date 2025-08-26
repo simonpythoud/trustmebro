@@ -39,11 +39,11 @@ export default async function RootLayout({
             </Link>
             <nav className="ml-auto flex items-center gap-3 sm:gap-4 text-sm whitespace-nowrap">
               <Link href="/" className="hover:underline hidden sm:inline">Home</Link>
-              <Link href="/contracts/new" className="hover:underline">Create contract</Link>
-              <Link href="/dashboard" className="hover:underline hidden xs:inline">Dashboard</Link>
+              <Link href="/contracts/new" className="hover:underline hidden xs:inline">Create contract</Link>
+              <Link href="/dashboard" className="hover:underline">Dashboard</Link>
               {session?.user?.email ? (
                 <>
-                  <Link href="/profile" className="hover:underline hidden sm:inline">Profile</Link>
+                  <Link href="/profile" className="hover:underline">Profile</Link>
                   <SignOutButton />
                 </>
               ) : (
@@ -67,6 +67,18 @@ export default async function RootLayout({
         <main>{children}</main>
 
         <footer className="mt-16 border-t border-foreground/10">
+          {/* Mobile language/region controls */}
+          <div className="sm:hidden border-t border-foreground/10">
+            <div className="mx-auto max-w-6xl px-4 h-10 flex items-center justify-end gap-3 text-xs">
+              <span className="text-foreground/50">Lang</span>
+              <Link href="/?lang=en" className="hover:underline">EN</Link>
+              <Link href="/?lang=fr" className="hover:underline">FR</Link>
+              <span className="mx-2 text-foreground/30">/</span>
+              <span className="text-foreground/50">Region</span>
+              <Link href="/?region=eu" className="hover:underline">EU</Link>
+              <Link href="/?region=us" className="hover:underline">US</Link>
+            </div>
+          </div>
           <div className="mx-auto max-w-6xl px-6 py-10 text-sm text-foreground/70 flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
             <div className="flex items-center gap-2">
               <img src="/globe.svg" alt="TrustMeBro" className="h-4 w-4" />

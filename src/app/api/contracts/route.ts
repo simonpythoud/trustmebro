@@ -4,16 +4,16 @@ import { CreateContractSchema } from '@/lib/schemas'
 
 export const runtime = 'nodejs'
 
-export async function GET(req: Request) {
+export async function GET() {
 	const email: string | null = await getRequestUserEmail()
 	if (!email) return new Response('Unauthorized', { status: 401 })
-	const url = new URL(req.url)
-	const role = url.searchParams.get('role')
-	if (role !== 'brand' && role !== 'creator') return new Response('Bad role', { status: 400 })
 	const me = await prisma.user.findUnique({ where: { email } })
 	if (!me) return new Response('Unauthorized', { status: 401 })
-	const where = role === 'brand' ? { brandId: me.id } : { creatorId: me.id }
-	const items = await prisma.contract.findMany({ where, orderBy: { createdAt: 'desc' } })
+	// Return all contracts where the user participates (brand or creator)
+	const items = await prisma.contract.findMany({
+		where: { OR: [{ brandId: me.id }, { creatorId: me.id }] },
+		orderBy: { createdAt: 'desc' },
+	})
 	return Response.json(items)
 }
 

@@ -9,7 +9,7 @@ export default function DashboardPage() {
   const [unauthorized, setUnauthorized] = useState(false)
   useEffect(() => {
     let mounted = true
-    fetch('/api/contracts?role=brand', { cache: 'no-store', credentials: 'include' })
+    fetch('/api/contracts', { cache: 'no-store', credentials: 'include' })
       .then(async (r) => {
         if (!mounted) return
         if (r.status === 401) { setUnauthorized(true); setItems([]); return }
