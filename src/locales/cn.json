@@ -216,7 +216,7 @@
       "retention": "保留与权利",
       "retention1": "保留期限与法律要求和纠纷窗口一致。",
       "retention2": "依据 GDPR/LPD 的访问、更正与删除权；联系以行使权利。",
-      "footer": "生产环境会发布经法律审核的政策。此 MVP 反映 TrustMeBro.md 的隐私内容。"
+      "footer": "生产环境会发布经法律审核的政策。此 MVP 反映 TrustMeBro MVP 的隐私内容。"
     },
     "status": {
       "title": "状态",
