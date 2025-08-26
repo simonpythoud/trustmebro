@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Locale } from '@/lib/i18n'
 
-type Region = 'eu' | 'us' | 'cn'
+type Region = 'eu' | 'us' | 'apac' | 'latam' | 'mena'
 
-type Combo = { group: 'Europe' | 'North America' | 'Asia'; region: Region; items: Array<{ code: Locale; label: string; icon: string }> }
+type Combo = { group: 'Europe' | 'North America' | 'APAC' | 'MENA / South Asia' | 'LATAM'; region: Region; items: Array<{ code: Locale; label: string; icon: string }> }
 
 const COMBOS: Combo[] = [
   { group: 'Europe', region: 'eu', items: [
@@ -14,15 +14,32 @@ const COMBOS: Combo[] = [
     { code: 'de', label: 'DE', icon: '🇩🇪' },
     { code: 'it', label: 'IT', icon: '🇮🇹' },
     { code: 'es', label: 'ES', icon: '🇪🇸' },
+    { code: 'pt', label: 'PT', icon: '🇵🇹' }
   ]},
-  { group: 'North America', region: 'us', items: [ // group north america under us for now
+  { group: 'North America', region: 'us', items: [
     { code: 'en', label: 'EN', icon: '🇺🇸' },
     { code: 'fr', label: 'FR', icon: '🇨🇦' },
     { code: 'es', label: 'ES', icon: '🇲🇽' },
+    { code: 'pt', label: 'PT', icon: '🇧🇷' }
   ]},
-  { group: 'Asia', region: 'cn', items: [ // group asia under cn for now
+  { group: 'APAC', region: 'apac', items: [
     { code: 'en', label: 'EN', icon: '🇸🇬' },
     { code: 'cn', label: 'CN', icon: '🇨🇳' },
+    { code: 'ja', label: 'JA', icon: '🇯🇵' },
+    { code: 'ko', label: 'KO', icon: '🇰🇷' },
+    { code: 'id', label: 'ID', icon: '🇮🇩' }
+  ]},
+  { group: 'MENA / South Asia', region: 'mena', items: [
+    { code: 'ar', label: 'AR', icon: '🇸🇦' },
+    { code: 'ur', label: 'UR', icon: '🇵🇰' },
+    { code: 'hi', label: 'HI', icon: '🇮🇳' },
+    { code: 'bn', label: 'BN', icon: '🇧🇩' },
+    { code: 'tr', label: 'TR', icon: '🇹🇷' },
+    { code: 'ru', label: 'RU', icon: '🇷🇺' }
+  ]},
+  { group: 'LATAM', region: 'latam', items: [
+    { code: 'es', label: 'ES', icon: '🇦🇷' },
+    { code: 'pt', label: 'PT', icon: '🇧🇷' }
   ]},
 ]
 
@@ -57,19 +74,8 @@ export function LanguageRegionMenu({ locale, region }: { locale: Locale; region:
         onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center rounded-md border border-foreground/20 px-3 py-1.5 text-sm hover:bg-foreground/5"
       >
-        <span className="mr-2">
-          {region === 'us' && locale === 'en' && '🇺🇸'}
-          {region === 'us' && locale === 'fr' && '🇨🇦'}
-          {region === 'us' && locale === 'es' && '🇲🇽'}
-          {region === 'eu' && locale === 'en' && '🇬🇧'}
-          {region === 'eu' && locale === 'fr' && '🇫🇷'}
-          {region === 'eu' && locale === 'de' && '🇩🇪'}
-          {region === 'eu' && locale === 'it' && '🇮🇹'}
-          {region === 'eu' && locale === 'es' && '🇪🇸'}
-          {region === 'cn' && locale === 'en' && '🇸🇬'}
-          {region === 'cn' && locale === 'cn' && '🇨🇳'}
-        </span>
-        <span className="mr-1">{region === 'us' ? 'US' : region === 'cn' ? 'CN' : 'EU'}</span>
+        <span className="mr-2">{region === 'us' ? '🇺🇸' : region === 'eu' ? '🇪🇺' : region === 'apac' ? '🌏' : region === 'latam' ? '🌎' : '🌍'}</span>
+        <span className="mr-1">{region === 'us' ? 'US' : region === 'eu' ? 'EU' : region === 'apac' ? 'APAC' : region === 'latam' ? 'LATAM' : 'MENA'}</span>
         <span className="opacity-60">/</span>
         <span className="ml-1">{locale.toUpperCase()}</span>
       </button>

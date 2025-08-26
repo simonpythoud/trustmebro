@@ -19,6 +19,13 @@ export async function middleware(req: any) {
 		res.cookies.set('lang', qpLang, { path: '/', sameSite: 'lax', httpOnly: false })
 	}
 
+	// Persist region from query as well
+	const qpRegion = url.searchParams.get('region') as string | null
+	const cookieRegion = req.cookies.get('region')?.value
+	if (qpRegion && qpRegion !== cookieRegion) {
+		res.cookies.set('region', qpRegion, { path: '/', sameSite: 'lax', httpOnly: false })
+	}
+
 	// Public paths allowed (but still set cookies)
 	const publicPaths = ['/', '/signin', '/signup', '/privacy', '/security', '/contact']
 	if (publicPaths.includes(pathname)) return res

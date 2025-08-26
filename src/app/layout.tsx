@@ -38,7 +38,8 @@ export default async function RootLayout({
   const cookieStore = await cookies()
   const locale = normalizeLocale(cookieStore.get('lang')?.value || 'en')
   const t = getT(locale)
-  const region = (cookieStore.get('region')?.value === 'us') ? 'us' : 'eu'
+  const cookieRegion = cookieStore.get('region')?.value
+  const region = (cookieRegion === 'us' || cookieRegion === 'apac' || cookieRegion === 'latam' || cookieRegion === 'mena') ? (cookieRegion as 'us'|'apac'|'latam'|'mena') : 'eu'
   return (
     <html lang={locale}>
       <body

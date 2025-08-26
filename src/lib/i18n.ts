@@ -4,8 +4,18 @@ import es from '@/locales/es.json'
 import de from '@/locales/de.json'
 import it from '@/locales/it.json'
 import cn from '@/locales/cn.json'
+import ar from '@/locales/ar.json'
+import hi from '@/locales/hi.json'
+import bn from '@/locales/bn.json'
+import pt from '@/locales/pt.json'
+import ru from '@/locales/ru.json'
+import ja from '@/locales/ja.json'
+import ur from '@/locales/ur.json'
+import id from '@/locales/id.json'
+import tr from '@/locales/tr.json'
+import ko from '@/locales/ko.json'
 
-export const SUPPORTED_LOCALES = ['en', 'fr', 'es', 'de', 'it', 'cn'] as const
+export const SUPPORTED_LOCALES = ['en', 'fr', 'es', 'de', 'it', 'cn', 'ar', 'hi', 'bn', 'pt', 'ru', 'ja', 'ur', 'id', 'tr', 'ko'] as const
 export type Locale = (typeof SUPPORTED_LOCALES)[number]
 
 const DICTS: Record<Locale, Record<string, any>> = {
@@ -15,6 +25,16 @@ const DICTS: Record<Locale, Record<string, any>> = {
 	de,
 	it,
 	cn,
+	ar,
+	hi,
+	bn,
+	pt,
+	ru,
+	ja,
+	ur,
+	id,
+	tr,
+	ko,
 }
 
 export function normalizeLocale(input: string | undefined | null): Locale {
@@ -25,6 +45,16 @@ export function normalizeLocale(input: string | undefined | null): Locale {
 	if (lower.startsWith('de')) return 'de'
 	if (lower.startsWith('it')) return 'it'
 	if (lower.startsWith('zh') || lower.startsWith('cn')) return 'cn'
+	if (lower.startsWith('ar')) return 'ar'
+	if (lower.startsWith('hi')) return 'hi'
+	if (lower.startsWith('bn')) return 'bn'
+	if (lower.startsWith('pt')) return 'pt'
+	if (lower.startsWith('ru')) return 'ru'
+	if (lower.startsWith('ja')) return 'ja'
+	if (lower.startsWith('ur')) return 'ur'
+	if (lower.startsWith('id') || lower.startsWith('in')) return 'id'
+	if (lower.startsWith('tr')) return 'tr'
+	if (lower.startsWith('ko')) return 'ko'
 	return 'en'
 }
 
