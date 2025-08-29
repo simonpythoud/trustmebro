@@ -57,48 +57,42 @@ export default function ProfilePage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 grid gap-6">
       <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">
-        <h2 className="font-semibold mb-1">{t('profile.title')}</h2>
-        <p className="text-sm text-foreground/70 mb-2">{t('profile.accountType')} <span className="font-medium">{role === 'brand' ? t('profile.brand') : role === 'creator' ? t('profile.creator') : '—'}</span></p>
-        <p className="text-sm text-foreground/70"><span className="font-medium">{t('profile.email')}</span> {email ?? '—'}</p>
-      </section>
-      <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">
-        <h3 className="font-semibold mb-4">{t('profile.companySection')}</h3>
-        <form
-          className="grid gap-4 md:grid-cols-2"
-          onSubmit={async (e) => {
-            e.preventDefault()
-            setError(null)
-            const res = await fetch('/api/user/profile', {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(profile),
-            })
-            if (!res.ok) setError(t('profile.failedSaveProfile'))
-          }}
-        >
+        <h2 className="font-semibold mb-4">{t('profile.title')}</h2>
+        <div className="grid gap-6 md:grid-cols-2">
           <div>
-            <label className="block text-sm mb-1">{t('profile.company')}</label>
-            <input className="border rounded w-full px-3 py-2" value={profile.companyName ?? ''} onChange={(e)=>setProfile(p=>({...p, companyName: e.target.value}))} />
+            <p className="text-sm text-foreground/70 mb-2">{t('profile.accountType')} <span className="font-medium">{role === 'brand' ? t('profile.brand') : role === 'creator' ? t('profile.creator') : '—'}</span></p>
+            <p className="text-sm text-foreground/70"><span className="font-medium">{t('profile.email')}</span> {email ?? '—'}</p>
           </div>
           <div>
-            <label className="block text-sm mb-1">{t('profile.vatId')}</label>
-            <input className="border rounded w-full px-3 py-2" value={profile.vatId ?? ''} onChange={(e)=>setProfile(p=>({...p, vatId: e.target.value}))} />
+            <form
+              className="grid gap-3"
+              onSubmit={async (e) => {
+                e.preventDefault()
+                setError(null)
+                const res = await fetch('/api/user/profile', {
+                  method: 'PUT',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(profile),
+                })
+                if (!res.ok) setError(t('profile.failedSaveProfile'))
+              }}
+            >
+              <label className="inline-flex items-center gap-2 text-sm"><input type="checkbox" checked={profile.searchable ?? true} onChange={(e)=>setProfile(p=>({...p, searchable: e.target.checked}))} /> {t('profile.searchable')}</label>
+              <div>
+                <button className="inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90" type="submit">{t('profile.saveProfile')}</button>
+              </div>
+            </form>
+            <p className="text-sm text-foreground/70 mt-3">{t('profile.verifyBenefits')}</p>
+            <div className="mt-2">
+              <button
+                className="inline-flex items-center rounded-md border border-foreground/20 px-4 py-2 text-sm font-medium hover:bg-foreground/5"
+                onClick={() => alert(t('profile.verifySoon'))}
+              >
+                {t('profile.verifyButton')}
+              </button>
+            </div>
           </div>
-          <div className="md:col-span-2">
-            <label className="block text-sm mb-1">{t('profile.address')}</label>
-            <input className="border rounded w-full px-3 py-2" value={profile.address ?? ''} onChange={(e)=>setProfile(p=>({...p, address: e.target.value}))} />
-          </div>
-          <div>
-            <label className="block text-sm mb-1">{t('profile.country')}</label>
-            <input className="border rounded w-full px-3 py-2" value={profile.country ?? ''} onChange={(e)=>setProfile(p=>({...p, country: e.target.value}))} />
-          </div>
-          <div>
-            <label className="inline-flex items-center gap-2 text-sm"><input type="checkbox" checked={profile.searchable ?? true} onChange={(e)=>setProfile(p=>({...p, searchable: e.target.checked}))} /> {t('profile.searchable')}</label>
-          </div>
-          <div className="md:col-span-2">
-            <button className="inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90" type="submit">{t('profile.saveProfile')}</button>
-          </div>
-        </form>
+        </div>
       </section>
 
       <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">
@@ -144,14 +138,42 @@ export default function ProfilePage() {
             <button className="inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90" type="submit">{t('profile.saveSocials')}</button>
           </div>
         </form>
-        <div className="mt-4">
-          <button
-            className="inline-flex items-center rounded-md border border-foreground/20 px-4 py-2 text-sm font-medium hover:bg-foreground/5"
-            onClick={() => alert(t('profile.verifySoon'))}
-          >
-            {t('profile.verifyButton')}
-          </button>
-        </div>
+      </section>
+      <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">
+        <h3 className="font-semibold mb-4">{t('profile.companySection')}</h3>
+        <form
+          className="grid gap-4 md:grid-cols-2"
+          onSubmit={async (e) => {
+            e.preventDefault()
+            setError(null)
+            const res = await fetch('/api/user/profile', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(profile),
+            })
+            if (!res.ok) setError(t('profile.failedSaveProfile'))
+          }}
+        >
+          <div>
+            <label className="block text-sm mb-1">{t('profile.company')}</label>
+            <input className="border rounded w-full px-3 py-2" value={profile.companyName ?? ''} onChange={(e)=>setProfile(p=>({...p, companyName: e.target.value}))} />
+          </div>
+          <div>
+            <label className="block text-sm mb-1">{t('profile.vatId')}</label>
+            <input className="border rounded w-full px-3 py-2" value={profile.vatId ?? ''} onChange={(e)=>setProfile(p=>({...p, vatId: e.target.value}))} />
+          </div>
+          <div className="md:col-span-2">
+            <label className="block text-sm mb-1">{t('profile.address')}</label>
+            <input className="border rounded w-full px-3 py-2" value={profile.address ?? ''} onChange={(e)=>setProfile(p=>({...p, address: e.target.value}))} />
+          </div>
+          <div>
+            <label className="block text-sm mb-1">{t('profile.country')}</label>
+            <input className="border rounded w-full px-3 py-2" value={profile.country ?? ''} onChange={(e)=>setProfile(p=>({...p, country: e.target.value}))} />
+          </div>
+          <div className="md:col-span-2">
+            <button className="inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90" type="submit">{t('profile.saveProfile')}</button>
+          </div>
+        </form>
       </section>
 
       <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">

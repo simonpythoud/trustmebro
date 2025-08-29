@@ -32,7 +32,7 @@ export async function middleware(req: any) {
 
 	// Admin section must be admin
 	if (pathname.startsWith('/admin')) {
-		const token: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+		const token: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET || 'devsecret' })
 		if (!token?.email || token?.role !== 'admin') {
 			console.warn(`[mw] deny admin path=${pathname} email=${token?.email ?? '-'} role=${token?.role ?? '-'}`)
 			return NextResponse.redirect(new URL('/signin', url), { status: 302 })
@@ -43,7 +43,7 @@ export async function middleware(req: any) {
 
 	// App authenticated areas
 	if (pathname.startsWith('/contracts') || pathname.startsWith('/dashboard') || pathname.startsWith('/profile')) {
-		const token: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+		const token: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET || 'devsecret' })
 		if (!token?.email) {
 			console.warn(`[mw] unauthenticated path=${pathname}; redirect → /signin`)
 			return NextResponse.redirect(new URL('/signin', url), { status: 302 })

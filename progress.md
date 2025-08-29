@@ -353,6 +353,7 @@ Fixes (recent):
 - [DONE] Mobile navbar overflow: tightened spacing, hid non-essential links on small screens, enabled horizontal scroll-safe container to avoid wrapping; updated `src/app/layout.tsx` and minor CSS.
 - [DONE] Language/region controls available on mobile via compact subheader over the footer.
 - [DONE] Dashboard fetch now aggregates brand and creator contracts (admins effectively see both); keeps clear unauthorized handling.
+ - [DONE] Fixed auth loop on Dashboard/Profile: unified NextAuth to `src/lib/auth.ts` with secret; re-exported via `src/auth.ts`. Middleware now guards `/dashboard` and `/profile`, and all protected API routes log unauthorized/user-not-found for production diagnostics. Profile fetch uses `credentials: 'include'`.
 
 ---
 
