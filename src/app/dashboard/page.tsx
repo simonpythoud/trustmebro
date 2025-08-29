@@ -57,25 +57,27 @@ export default function DashboardPage() {
         <h1 className="text-3xl font-semibold">{t('dashboard.title')}</h1>
         <Link data-testid="create-contract" href="/contracts/new" className="ml-auto inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90">{t('dashboard.create')}</Link>
       </div>
-      <div className="mt-4 flex flex-wrap items-center gap-3">
-        <h2 className="text-lg font-medium">{t('dashboard.contractsTitle')}</h2>
-        <div className="ml-auto flex items-center gap-2">
-          <label className="text-sm text-foreground/70" htmlFor="filter-state">{t('dashboard.filter')}</label>
-          <select id="filter-state" className="rounded-md border border-foreground/20 bg-background/60 px-2 py-1 text-sm" value={stateFilter} onChange={(e) => setStateFilter(e.target.value)}>
-            <option value="all">{t('dashboard.filterAll')}</option>
-            {Array.from(new Set(items?.map((i) => i.state) ?? [])).map((st) => (
-              <option key={st} value={st}>{t(`state.${st}`)}</option>
-            ))}
-          </select>
-          <label className="ml-3 text-sm text-foreground/70" htmlFor="sort-by">{t('dashboard.sort')}</label>
-          <select id="sort-by" className="rounded-md border border-foreground/20 bg-background/60 px-2 py-1 text-sm" value={sortBy} onChange={(e) => setSortBy(e.target.value as any)}>
-            <option value="newest">{t('dashboard.sortNewest')}</option>
-            <option value="oldest">{t('dashboard.sortOldest')}</option>
-            <option value="budgetHigh">{t('dashboard.sortBudgetHigh')}</option>
-            <option value="budgetLow">{t('dashboard.sortBudgetLow')}</option>
-          </select>
+      {items !== null && !unauthorized && (
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <h2 className="text-lg font-medium">{t('dashboard.contractsTitle')}</h2>
+          <div className="ml-auto flex items-center gap-2">
+            <label className="text-sm text-foreground/70" htmlFor="filter-state">{t('dashboard.filter')}</label>
+            <select id="filter-state" className="rounded-md border border-foreground/20 bg-background/60 px-2 py-1 text-sm" value={stateFilter} onChange={(e) => setStateFilter(e.target.value)}>
+              <option value="all">{t('dashboard.filterAll')}</option>
+              {Array.from(new Set(items?.map((i) => i.state) ?? [])).map((st) => (
+                <option key={st} value={st}>{t(`state.${st}`)}</option>
+              ))}
+            </select>
+            <label className="ml-3 text-sm text-foreground/70" htmlFor="sort-by">{t('dashboard.sort')}</label>
+            <select id="sort-by" className="rounded-md border border-foreground/20 bg-background/60 px-2 py-1 text-sm" value={sortBy} onChange={(e) => setSortBy(e.target.value as any)}>
+              <option value="newest">{t('dashboard.sortNewest')}</option>
+              <option value="oldest">{t('dashboard.sortOldest')}</option>
+              <option value="budgetHigh">{t('dashboard.sortBudgetHigh')}</option>
+              <option value="budgetLow">{t('dashboard.sortBudgetLow')}</option>
+            </select>
+          </div>
         </div>
-      </div>
+      )}
 
       {items === null ? (
         <div className="mt-8 text-sm text-foreground/60">{t('dashboard.loading')}</div>
