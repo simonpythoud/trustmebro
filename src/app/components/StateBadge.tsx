@@ -13,7 +13,7 @@ export function StateBadge({ state, label }: { state: string, label?: string }) 
 		'bg-gray-100 text-gray-700 border-gray-200'
 	return (
 		<span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium ${color}`}>
-			{label ?? state}
+			{label ?? state.replace(/([a-z])([A-Z])/g, '$1 $2')}
 		</span>
 	)
 }

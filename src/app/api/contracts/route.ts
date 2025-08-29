@@ -19,6 +19,16 @@ export async function GET() {
 	const items = await prisma.contract.findMany({
 		where: { OR: [{ brandId: me.id }, { creatorId: me.id }] },
 		orderBy: { createdAt: 'desc' },
+		include: {
+			brand: {
+				select: {
+					name: true,
+					email: true,
+					profile: { select: { companyName: true } },
+				},
+			},
+			creator: { select: { name: true, email: true } },
+		},
 	})
 	return Response.json(items)
 }
