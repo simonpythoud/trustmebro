@@ -7,19 +7,28 @@ export const runtime = 'nodejs'
 export async function GET() {
   const session = await auth()
   const email = session?.user?.email
-  if (!email) return new Response('Unauthorized', { status: 401 })
+  if (!email) {
+    console.warn('[api] /api/user/settings GET unauthorized')
+    return new Response('Unauthorized', { status: 401 })
+  }
   const user = await prisma.user.findUnique({
     where: { email },
     select: { settings: true },
   })
-  if (!user) return new Response('Not found', { status: 404 })
+  if (!user) {
+    console.warn('[api] /api/user/settings GET user not found')
+    return new Response('Not found', { status: 404 })
+  }
   return Response.json(user.settings)
 }
 
 export async function PUT(req: Request) {
   const session = await auth()
   const email = session?.user?.email
-  if (!email) return new Response('Unauthorized', { status: 401 })
+  if (!email) {
+    console.warn('[api] /api/user/settings PUT unauthorized')
+    return new Response('Unauthorized', { status: 401 })
+  }
   const me = await prisma.user.findUnique({ where: { email }, select: { id: true } })
   if (!me) return new Response('Not found', { status: 404 })
   const body = await req.json().catch(() => null)

@@ -29,6 +29,7 @@ Files: `/prisma/schema.prisma`, generated client: `src/generated/prisma`
   - NextAuth tables: `Account`, `Session`, `VerificationToken`
   - Indices per spec (state/owner, funding filters, etc.)
 - [PARTIAL] State fields exist, but lifecycle wasn’t fully automated (see State machine gaps below)
+- [DONE] Extended `Profile` with `searchable` (Boolean, default true) and social account fields; migrations applied and Prisma client regenerated.
 
 Gaps/TODO (coding — Cursor):
 
@@ -153,6 +154,7 @@ Implemented pages:
 
 - [DONE] `signin` (Credentials), `signup`
 - [DONE] `profile` with editable profile and settings forms
+- [DONE] `profile` page now shows email, adds "discoverable" toggle (default true), and a dedicated Social accounts section (TikTok, Instagram, YouTube, Twitter/X, LinkedIn, Twitch) with save; includes a "Verify profile" button (placeholder alert). EN/FR i18n updated.
 - [DONE] `dashboard` with contract cards and state pills (`data-testid="state-..."`)
 - [DONE] `contracts/new` wizard (single page MVP) with all required inputs; requires manual `creatorId`
 - [DONE] `contracts/[id]` with actions: fund buttons, submit, approve

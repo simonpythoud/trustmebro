@@ -56,8 +56,9 @@ export async function POST(req: Request) {
     } catch {}
   }
 
-  // Track transfers for payouts if configured
-  if (type === 'transfer.created' || type === 'transfer.paid' || type === 'transfer.failed') {
+  // Track transfers for payouts if configured (Express). Stripe fires `transfer.created/updated/reversed`.
+  const typeStr = type as unknown as string
+  if (typeStr === 'transfer.created' || typeStr === 'transfer.updated' || typeStr === 'transfer.reversed') {
     const transfer = event.data.object as any
     const transferId = transfer?.id as string
     if (transferId) {
@@ -65,11 +66,10 @@ export async function POST(req: Request) {
         const payout = await prisma.payout.findFirst({ where: { pspTransferId: transferId }})
         if (payout) {
           let status = payout.status
-          if (type === 'transfer.paid') status = 'paid'
-          if (type === 'transfer.failed') status = 'failed'
+          if (typeStr === 'transfer.reversed') status = 'failed'
           await prisma.payout.update({ where: { id: payout.id }, data: { status }})
         }
-        await prisma.auditLog.create({ data: { action: `WEBHOOK.${type}`, resource: 'Payout', resourceId: transferId, metadata: serializeStripeEvent(event) } })
+        await prisma.auditLog.create({ data: { action: `WEBHOOK.${typeStr}`, resource: 'Payout', resourceId: transferId, metadata: serializeStripeEvent(event) } })
       } catch {}
     }
   }

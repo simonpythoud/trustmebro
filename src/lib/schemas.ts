@@ -33,6 +33,13 @@ export const UpdateProfileSchema = z.object({
   vatId: z.string().max(50).nullable().optional(),
   address: z.string().max(200).nullable().optional(),
   country: z.string().max(2).nullable().optional(),
+  searchable: z.boolean().optional(),
+  socialTikTok: z.string().max(200).nullable().optional(),
+  socialInstagram: z.string().max(200).nullable().optional(),
+  socialYouTube: z.string().max(200).nullable().optional(),
+  socialTwitter: z.string().max(200).nullable().optional(),
+  socialLinkedIn: z.string().max(200).nullable().optional(),
+  socialTwitch: z.string().max(200).nullable().optional(),
 })
 export type UpdateProfileInput = z.infer<typeof UpdateProfileSchema>
 

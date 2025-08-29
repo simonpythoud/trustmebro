@@ -7,6 +7,13 @@ type Profile = {
   vatId?: string | null
   address?: string | null
   country?: string | null
+  searchable?: boolean
+  socialTikTok?: string | null
+  socialInstagram?: string | null
+  socialYouTube?: string | null
+  socialTwitter?: string | null
+  socialLinkedIn?: string | null
+  socialTwitch?: string | null
 }
 type Settings = {
   theme: string
@@ -24,16 +31,18 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile>({})
   const [settings, setSettings] = useState<Settings | null>(null)
   const [role, setRole] = useState<string | null>(null)
+  const [email, setEmail] = useState<string | null>(null)
 
   useEffect(() => {
     ;(async () => {
       try {
-        const r = await fetch('/api/user/profile', { cache: 'no-store' })
+        const r = await fetch('/api/user/profile', { cache: 'no-store', credentials: 'include' })
         if (!r.ok) throw new Error('Failed to load')
         const j = await r.json()
         setProfile(j.profile ?? {})
         setSettings(j.settings ?? null)
         setRole(j.role ?? null)
+        setEmail(j.email ?? null)
       } catch (e: any) {
         setError(e.message ?? 'Failed to load')
       } finally {
@@ -48,8 +57,12 @@ export default function ProfilePage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 grid gap-6">
       <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">
-        <h2 className="font-semibold mb-4">{t('profile.title')}</h2>
-        <p className="mb-4 text-sm text-foreground/70">{t('profile.accountType')} <span className="font-medium">{role === 'brand' ? t('profile.brand') : role === 'creator' ? t('profile.creator') : '—'}</span></p>
+        <h2 className="font-semibold mb-1">{t('profile.title')}</h2>
+        <p className="text-sm text-foreground/70 mb-2">{t('profile.accountType')} <span className="font-medium">{role === 'brand' ? t('profile.brand') : role === 'creator' ? t('profile.creator') : '—'}</span></p>
+        <p className="text-sm text-foreground/70"><span className="font-medium">{t('profile.email')}</span> {email ?? '—'}</p>
+      </section>
+      <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">
+        <h3 className="font-semibold mb-4">{t('profile.companySection')}</h3>
         <form
           className="grid gap-4 md:grid-cols-2"
           onSubmit={async (e) => {
@@ -79,6 +92,9 @@ export default function ProfilePage() {
             <label className="block text-sm mb-1">{t('profile.country')}</label>
             <input className="border rounded w-full px-3 py-2" value={profile.country ?? ''} onChange={(e)=>setProfile(p=>({...p, country: e.target.value}))} />
           </div>
+          <div>
+            <label className="inline-flex items-center gap-2 text-sm"><input type="checkbox" checked={profile.searchable ?? true} onChange={(e)=>setProfile(p=>({...p, searchable: e.target.checked}))} /> {t('profile.searchable')}</label>
+          </div>
           <div className="md:col-span-2">
             <button className="inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90" type="submit">{t('profile.saveProfile')}</button>
           </div>
@@ -86,7 +102,60 @@ export default function ProfilePage() {
       </section>
 
       <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">
-        <h2 className="font-semibold mb-4">{t('profile.settings')}</h2>
+        <h3 className="font-semibold mb-4">{t('profile.socials')}</h3>
+        <form
+          className="grid gap-4 md:grid-cols-2"
+          onSubmit={async (e) => {
+            e.preventDefault()
+            setError(null)
+            const res = await fetch('/api/user/profile', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(profile),
+            })
+            if (!res.ok) setError(t('profile.failedSaveProfile'))
+          }}
+        >
+          <div>
+            <label className="block text-sm mb-1">TikTok</label>
+            <input className="border rounded w-full px-3 py-2" placeholder="@handle or URL" value={profile.socialTikTok ?? ''} onChange={(e)=>setProfile(p=>({...p, socialTikTok: e.target.value}))} />
+          </div>
+          <div>
+            <label className="block text-sm mb-1">Instagram</label>
+            <input className="border rounded w-full px-3 py-2" placeholder="@handle or URL" value={profile.socialInstagram ?? ''} onChange={(e)=>setProfile(p=>({...p, socialInstagram: e.target.value}))} />
+          </div>
+          <div>
+            <label className="block text-sm mb-1">YouTube</label>
+            <input className="border rounded w-full px-3 py-2" placeholder="Channel URL" value={profile.socialYouTube ?? ''} onChange={(e)=>setProfile(p=>({...p, socialYouTube: e.target.value}))} />
+          </div>
+          <div>
+            <label className="block text-sm mb-1">Twitter / X</label>
+            <input className="border rounded w-full px-3 py-2" placeholder="@handle or URL" value={profile.socialTwitter ?? ''} onChange={(e)=>setProfile(p=>({...p, socialTwitter: e.target.value}))} />
+          </div>
+          <div>
+            <label className="block text-sm mb-1">LinkedIn</label>
+            <input className="border rounded w-full px-3 py-2" placeholder="Profile or Company URL" value={profile.socialLinkedIn ?? ''} onChange={(e)=>setProfile(p=>({...p, socialLinkedIn: e.target.value}))} />
+          </div>
+          <div>
+            <label className="block text-sm mb-1">Twitch</label>
+            <input className="border rounded w-full px-3 py-2" placeholder="Channel URL" value={profile.socialTwitch ?? ''} onChange={(e)=>setProfile(p=>({...p, socialTwitch: e.target.value}))} />
+          </div>
+          <div className="md:col-span-2">
+            <button className="inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90" type="submit">{t('profile.saveSocials')}</button>
+          </div>
+        </form>
+        <div className="mt-4">
+          <button
+            className="inline-flex items-center rounded-md border border-foreground/20 px-4 py-2 text-sm font-medium hover:bg-foreground/5"
+            onClick={() => alert(t('profile.verifySoon'))}
+          >
+            {t('profile.verifyButton')}
+          </button>
+        </div>
+      </section>
+
+      <section className="rounded-lg border border-foreground/10 p-6 bg-background/60">
+        <h3 className="font-semibold mb-4">{t('profile.settings')}</h3>
         <form
           className="grid gap-4 md:grid-cols-2"
           onSubmit={async (e) => {

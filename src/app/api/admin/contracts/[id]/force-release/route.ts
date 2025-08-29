@@ -52,7 +52,7 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
               destination: creator.profile.pspAccountId,
               metadata: { contractId: id },
             })
-            await prisma.payout.update({ where: { id: created.id }, data: { pspTransferId: transfer.id, status: (transfer.status as any) || 'queued' }})
+            await prisma.payout.update({ where: { id: created.id }, data: { pspTransferId: transfer.id, status: 'queued' }})
           } catch (e) {}
         }
       }

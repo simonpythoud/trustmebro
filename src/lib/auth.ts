@@ -3,9 +3,11 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import Credentials from 'next-auth/providers/credentials'
 import { prisma } from './prisma'
 import { compare } from 'bcryptjs'
+import { env } from './env'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
 	adapter: PrismaAdapter(prisma),
+	secret: env.NEXTAUTH_SECRET,
 	session: { strategy: 'jwt' },
 	providers: [
 		Credentials({
@@ -20,7 +22,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 				const user = await prisma.user.findUnique({ where: { email } })
 				if (!user?.passwordHash) return null
 				const ok = await compare(password, user.passwordHash)
-				if (!ok) return null
+				if (!ok) {
+					console.warn(`[auth] authorize failed for ${email}`)
+					return null
+				}
+				console.info(`[auth] sign-in ok email=${email} role=${user.role}`)
 				return { id: user.id, email: user.email, name: user.name, role: user.role } as any
 			},
 		}),

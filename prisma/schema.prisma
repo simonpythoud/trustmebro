@@ -123,6 +123,15 @@ model Profile {
   country      String?
   pspAccountId String? // Stripe/MangoPay account
   kycStatus    String? // mirrored from PSP
+  searchable   Boolean @default(true)
+
+  // Social accounts (URLs or handles)
+  socialTikTok     String?
+  socialInstagram  String?
+  socialYouTube    String?
+  socialTwitter    String?
+  socialLinkedIn   String?
+  socialTwitch     String?
 
   user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

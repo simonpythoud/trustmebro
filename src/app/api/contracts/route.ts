@@ -6,9 +6,15 @@ export const runtime = 'nodejs'
 
 export async function GET() {
 	const email: string | null = await getRequestUserEmail()
-	if (!email) return new Response('Unauthorized', { status: 401 })
+	if (!email) {
+		console.warn('[api] /api/contracts GET unauthorized')
+		return new Response('Unauthorized', { status: 401 })
+	}
 	const me = await prisma.user.findUnique({ where: { email } })
-	if (!me) return new Response('Unauthorized', { status: 401 })
+	if (!me) {
+		console.warn('[api] /api/contracts GET user not found')
+		return new Response('Unauthorized', { status: 401 })
+	}
 	// Return all contracts where the user participates (brand or creator)
 	const items = await prisma.contract.findMany({
 		where: { OR: [{ brandId: me.id }, { creatorId: me.id }] },

@@ -34,17 +34,21 @@ export async function middleware(req: any) {
 	if (pathname.startsWith('/admin')) {
 		const token: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
 		if (!token?.email || token?.role !== 'admin') {
+			console.warn(`[mw] deny admin path=${pathname} email=${token?.email ?? '-'} role=${token?.role ?? '-'}`)
 			return NextResponse.redirect(new URL('/signin', url), { status: 302 })
 		}
+		console.info(`[mw] allow admin email=${token.email}`)
 		return res
 	}
 
-	// App authenticated areas (allow public dashboard for conversion)
-	if (pathname.startsWith('/contracts')) {
+	// App authenticated areas
+	if (pathname.startsWith('/contracts') || pathname.startsWith('/dashboard') || pathname.startsWith('/profile')) {
 		const token: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
 		if (!token?.email) {
+			console.warn(`[mw] unauthenticated path=${pathname}; redirect → /signin`)
 			return NextResponse.redirect(new URL('/signin', url), { status: 302 })
 		}
+		console.info(`[mw] allow path=${pathname} email=${token.email}`)
 		return res
 	}
 
@@ -54,7 +58,7 @@ export async function middleware(req: any) {
 export const config = {
 	matcher: [
 		'/api/:path*',
-		'/(dashboard|contracts|admin)/:path*',
+		'/(dashboard|contracts|admin|profile)/:path*',
 		'/',
 	],
 }
